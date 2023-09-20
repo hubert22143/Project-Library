@@ -20,70 +20,104 @@ quitNotification.addEventListener('click', () => {
     layerBackground.style.display = 'none';
 })
 //-------------------------------//
-const tittleInput = document.getElementById('title');
+const titleInput = document.getElementById('title');
 const authorInput = document.getElementById('author');
 
-function getTittleInputValue(){
-    let tittleHolder = tittleInput.value;
-    return tittleHolder;
+function getTittleInputValue() {
+  const titleHolder = titleInput.value;
+  return titleHolder;
 }
-function getAuthorInputValue(){
-    let authorHolder = authorInput.value;
-    return authorHolder;
+
+function getAuthorInputValue() {
+  const authorHolder = authorInput.value;
+  return authorHolder;
 }
-//----------------------------------//
+
 const submitValuesToLibrary = document.getElementById('submit');
-let libraryArray = [];
+const libraryArray = [];
 
-
-function Book(author,title){
-    this.author = author;
-    this.title = title;
+function Book(author, title) {
+  this.author = author;
+  this.title = title;
+  this.checkboxId = generateUniqueId();
+  this.statusDisplayClass = generateUniqueClass();
 }
 
-function addToLibrary(newBook){
-    libraryArray.push(newBook);
-    displayLibrary(libraryArray);
+function generateUniqueId() {
+  return 'checkbox-' + Math.random().toString(36).substring(2);
+}
+function generateUniqueClass() {
+  return 'status-' + Math.random().toString(36).substring(2);
+}
+Book.prototype.marker = function() {
+  const statusDisplay = document.querySelector(`.${this.statusDisplayClass}`); 
+  const checkbox = document.getElementById(this.checkboxId);
+
+  if (checkbox && statusDisplay) {
+    checkbox.addEventListener('change', () => {
+      if (checkbox.checked) {
+        statusDisplay.style.backgroundColor = 'green';
+      } else {
+        statusDisplay.style.backgroundColor = 'red';
+      }
+    });
+  } else {
+    setTimeout(() => this.marker(), 100);
+  }
+};
+
+function addToLibrary(newBook) {
+  libraryArray.push(newBook);
+  displayLibrary(libraryArray);
 }
 
-function displayLibrary(libraryArray){
-    const bookContainer = document.querySelector('.book-container');
-    console.log(libraryArray);
-    if(bookContainer){
-        bookContainer.innerHTML ='';
-    for(newBook of libraryArray){
-        const titleDisplay = document.createElement('div');
-        titleDisplay.classList.add('tittle-display');
-        titleDisplay.textContent = `Title: ${newBook.title}`;
-        const authorDisplay = document.createElement('div');
-        authorDisplay.classList.add('author-display');
-        authorDisplay.textContent = `Author: ${newBook.author}`;
-        const statusDisplay = document.createElement('div');
-        statusDisplay.classList.add('status');
-        statusDisplay.innerHTML = `Readed? <input type="checkbox" id="readed">`;
-        bookContainer.appendChild(titleDisplay);
-        bookContainer.appendChild(authorDisplay);
-        bookContainer.appendChild(statusDisplay);
+function displayLibrary(libraryArray) {
+  const bookContainer = document.querySelector('.book-container');
+  
+  if (bookContainer) {
+    bookContainer.innerHTML = '';
+    
+    for (const newBook of libraryArray) {
+      const titleDisplay = document.createElement('div');
+      titleDisplay.classList.add('title-display'); 
+      titleDisplay.textContent = `Title: ${newBook.title}`;
+      
+      const authorDisplay = document.createElement('div');
+      authorDisplay.classList.add('author-display');
+      authorDisplay.textContent = `Author: ${newBook.author}`;
+      
+      const statusDisplay = document.createElement('div');
+      statusDisplay.classList.add(newBook.statusDisplayClass);
+      statusDisplay.textContent = 'Readed?';
+      
+      const newCheckBox = document.createElement('input');
+      newCheckBox.type = 'checkbox';
+      newCheckBox.id = newBook.checkboxId;
+      statusDisplay.append(newCheckBox);
+      
+      bookContainer.appendChild(titleDisplay);
+      bookContainer.appendChild(authorDisplay);
+      bookContainer.appendChild(statusDisplay);
+      
+      if (newBook) {
+        newBook.marker();
+      }
     }
+  }
 }
-}
-
-
 
 submitValuesToLibrary.addEventListener('click', (e) => {
-    libraryArray.forEach(book => {
-        console.log(`Title: ${book.title}, Author: ${book.name}`);
-        console.log(book);
-    });
-    e.preventDefault()
-    let titleValue = getTittleInputValue();
-    let authorValue = getAuthorInputValue();
-    if (titleValue.trim() !== '' && authorValue.trim() !== '') {
-        const newBook = new Book(titleValue, authorValue);
-        addToLibrary(newBook);
-    } else {
-        alert('Please fill in both title and author fields.');
-    }
-    tittleInput.value = '';
-    authorInput.value = '';
-})
+  e.preventDefault();
+  const titleValue = getTittleInputValue();
+  const authorValue = getAuthorInputValue();
+  
+  if (titleValue.trim() !== '' && authorValue.trim() !== '') {
+    const newBook = new Book(authorValue, titleValue);
+    addToLibrary(newBook);
+  } else {
+    alert('Please fill in both title and author fields.');
+  }
+  
+  titleInput.value = '';
+  authorInput.value = '';
+});
