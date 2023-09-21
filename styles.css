@@ -6,8 +6,7 @@ body{
     font-size: 1rem;
     letter-spacing: 0.1rem;
     font-family: Arial, Helvetica, sans-serif;
-    transition: opacity 0.3s ease-in-out; /* Add a transition for opacity change */
-    background-color: #f0f0f0; /* Set the body background color */
+    background-color: #f0f0f0;
 }
 .content{
     background-color: #171717;
@@ -17,40 +16,44 @@ body{
     height: 100vh;
     width: 100%;
 }
+.tittle-container{
+    display: flex;
+    justify-content: center;
+}
 .library-title{
+    display: flex;
+    justify-content: center;
     background-color: #171717;
-    text-align: center;
     width: 100%;
     color: white;
 }
 .library{
     display: flex;
+    justify-content: center;
     width: 100%;
     height: 45vh;
     background-color: #2C2C2C;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
     letter-spacing: 0.2rem;
+    overflow: hidden;
 }
-.library-previous,.library-actual,.library-next{
+.library-item{
     background-color: #2C2C2C;
-    width: 33%;
     display: flex;
+    flex: 1 1 0;
     justify-content: center;
+    align-items: center;
     height: 100%;
     font-style: italic;
+    transition: transform 0.5s
 }
 .svg-container-left{
-    top: 16.5rem;
-    left: 600px;
-    position: relative;
-    width: 50px;
-    height: 50px;
+    display: flex;
+    align-items: center;
     background-color: blanchedalmond;
     border-radius: 20px;
 }
 .svg-container-right{
-    top: 16.5rem;
-    right: 600px;
     position: relative;
     width: 50px;
     height: 50px;
@@ -59,21 +62,15 @@ body{
 }
 .inactive{
     background-color: silver;
-    opacity: 0.2;
     box-shadow: inset 0 0 10px rgba(255, 255, 255, 0.7);
     border: 1px solid silver;
     border-radius: 10px;
 }
 .active{
     background-color: tomato;
-    opacity: 0.9;
     box-shadow: inset 0px 35px 15px 0px rgba(0, 0, 255, 0.3);
     border: 1px solid black;
     border-radius: 10px;
-}
-.library-previous{
-    display: flex;
-    flex-direction: column;
 }
 img{
     max-width: 100%;
@@ -110,10 +107,11 @@ justify-content: center;
     position: absolute;
     width: 500px;
     height: 350px;
-    background-color: gray;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Customize box shadow */
-    padding: 20px; /* Customize padding */
-    transition: left 0.3s;
+    background-color: rgba(64, 138, 208);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    padding: 20px;
+    z-index: 5;
+    opacity: 1;
   }
 .notification-image{
     width: 50px;
@@ -142,9 +140,9 @@ justify-content: center;
     position: fixed;
     width: 100%;
     height: 100%;
-    background-color: slategrey;
-    transition: background-color 0.3s ease-in-out;
+    background-color: slategray;
     pointer-events: none;
+
 }
 .content-title{
     display: flex;
@@ -162,37 +160,103 @@ form{
     margin-left: 15px;
 }
 .button-container{
-    margin-top: 15px;
-    margin-left: 450px;
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+#submit{
+    margin-left: 20px;
 }
 button{
     width: 150px;
     height: 70px;
     border-radius: 15px;
     cursor: pointer;
-    border: 1px solid black;
+    border: 1px solid gray;
+    box-shadow: 0 0 12px gray;
+    background-color: rgba(255,255,255,70%);
+}
+input{
+    border-radius: 3px;
+    background-color: rgba(255,255,255,70%);
 }
 button:hover{
     background-color: gray;
 }
 .library-show {
-    width: 500px;
-    display: block;
+    width: 100%;
+    height: 500px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 .book-container{
+    padding: 5px;
     display: grid;
-    padding: 10px;
-    width: 550px;
-    height: 500px;
-    overflow-y: auto;
+    width: 100%;
+    overflow: scroll;
     grid-template-rows: repeat(1,minmax(250px,1fr));
-    grid-template-columns: repeat(3,minmax(250px,1fr));
+    grid-template-columns: repeat(4,minmax(250px,1fr));
     grid-auto-rows: minmax(250px,1fr);
     grid-auto-columns: minmax(250px,1fr);
     gap: 20px;
     border: 1px solid black;
+    justify-content: center;
 }
 .book-container > div {
     border: 1px solid blue;
     padding: 30px;
+}
+.overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: 999;
+}
+
+.modal-block {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #171717;
+    padding: 20px;
+    z-index: 1000;
+}
+#insert-book{
+    width: 175px;
+    height: 75px;
+    background-color: aquamarine;
+}
+#insert-book:hover{
+    background-color: aqua;
+    transform: scale(1.4);
+}
+#button-right:hover{
+    cursor: pointer;
+}
+#button-left:hover{
+    cursor: pointer;
+}
+.svg-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.button-container{
+    display: flex;
+    flex-direction: column;
+    width: 500px;
+    height: 200px;
+}
+.button{
+    margin-top: 30px;
+}
+.button-container{
+    margin-left: 60px;
 }
