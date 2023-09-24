@@ -3,8 +3,6 @@ const notificationButton = document.getElementById('notification-button');
 const quitNotification = document.getElementById('svg-quit');
 const notificationContainer = document.querySelector('.notification-box-info');
 const body = document.body;
-const movePanelLeft = document.querySelector('.svg-container-left');
-const movePanelRight = document.querySelector('.svg-container-right')
 const layerBackground = document.querySelector('.layer');
 notificationButton.addEventListener('click', () => {
 notificationContainer.style.display = 'block';
@@ -24,28 +22,28 @@ layerBackground.addEventListener('click', () => {
   movePanelLeft.style.display = 'block';
   movePanelRight.style.display = 'block';
 })
-
-const libraryItems = document.querySelectorAll('.library-item');
-let currentIndex = 0;
+const movePanelLeft = document.querySelector('.svg-container-left');
+const movePanelRight = document.querySelector('.svg-container-right');
+const library = document.querySelector('.library');
+let libraryItems = library.querySelectorAll('.library-item');
+let currentIndex = 1;
 movePanelLeft.addEventListener('click', () => {
-  currentIndex = (currentIndex - 1 + libraryItems.length ) % libraryItems.length;
+  currentIndex = (currentIndex - 1 + libraryItems.length) % libraryItems.length;
   updateCarousel();
 });
 movePanelRight.addEventListener('click', () => {
   currentIndex = (currentIndex + 1) % libraryItems.length;
-  updateCarousel();
+ updateCarousel();
 });
-function updateCarousel(){
-  const containerWidth = document.querySelector('.library').offsetWidth;
-  const itemWidth = libraryItems[0].offsetWidth;
-  const spacing = containerWidth * 0.5;
-  libraryItems.forEach((item,index) => {
-    const offset = index - currentIndex;
-    const translateX = offset * (itemWidth + spacing);
-    item.style.transform = `translateX(${translateX}px)`;
-  })
+function updateCarousel() {
+  console.log(libraryItems.length);
+  libraryItems.forEach((item, index) => {
+    const offset = (index - currentIndex) * item.clientWidth;
+    console.log(`Item ${index} Offset: ${offset}px`);
+    item.style.transform = `translateX(${offset}px)`;
+  });
 }
-updateCarousel();
+
 //-------------------------------//
 const insertButton = document.getElementById('insert-book');
 const modalBox = document.querySelector('.modal-block');
@@ -251,7 +249,7 @@ submitValuesToLibrary.addEventListener('click', (e) => {
       const newItem = document.createElement('div');
       newItem.classList.add('library-item');
       const itemContent = document.createElement('div');
-      itemContent.classList.add('content')
+      itemContent.classList.add('content-library')
       newItem.appendChild(itemContent);
       const itemHeader = document.createElement('div');
       itemHeader.classList.add('itemHeader')
@@ -276,10 +274,7 @@ submitValuesToLibrary.addEventListener('click', (e) => {
       itemInfoText.classList.add('item-info-text');
       itemInfoText.textContent = `The author of this manga is : ${authorValue} And it has : ${pageValue} pages`
       itemInfo.appendChild(itemInfoText);
-      
-
       libraryContainer.appendChild(newItem);
-      currentIndex = Array.from(libraryItems).indexOf(newItem);
       updateCarousel();
     }
   } else {
