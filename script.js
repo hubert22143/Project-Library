@@ -25,7 +25,7 @@ layerBackground.addEventListener('click', () => {
 const movePanelLeft = document.querySelector('.svg-container-left');
 const movePanelRight = document.querySelector('.svg-container-right');
 const library = document.querySelector('.library');
-let libraryItems = library.querySelectorAll('.library-item');
+const libraryItems = Array.from(library.childNodes).filter(node => node.nodeType === Node.ELEMENT_NODE);
 let currentIndex = 1;
 movePanelLeft.addEventListener('click', () => {
   currentIndex = (currentIndex - 1 + libraryItems.length) % libraryItems.length;
@@ -275,6 +275,8 @@ submitValuesToLibrary.addEventListener('click', (e) => {
       itemInfoText.textContent = `The author of this manga is : ${authorValue} And it has : ${pageValue} pages`
       itemInfo.appendChild(itemInfoText);
       libraryContainer.appendChild(newItem);
+
+      libraryItems.push(newItem);
       updateCarousel();
     }
   } else {
