@@ -1,20 +1,64 @@
 // notification area //
-const notificationButton = document.getElementById('notification-button');
+const notificationButton = document.querySelectorAll('#information-about');
 const quitNotification = document.getElementById('svg-quit');
 const notificationContainer = document.querySelector('.notification-box-info');
-const body = document.body;
 const layerBackground = document.querySelector('.layer');
-notificationButton.addEventListener('click', () => {
-notificationContainer.style.display = 'block';
-movePanelLeft.style.display = 'none';
-movePanelRight.style.display = 'none';
-layerBackground.style.display = 'block';
-});
+const movePanelLeft = document.querySelector('.svg-container-left');
+const movePanelRight = document.querySelector('.svg-container-right');
+const library = document.querySelector('.library');
+const libraryItems = Array.from(library.childNodes).filter(node => node.nodeType === Node.ELEMENT_NODE);
+let animeContent;
+
+const detailsContainer = [
+  {
+    Name: 'Dragon Ball',
+    Author: 'Akira Toriyama',
+    Pages: '523',
+  },
+  {
+    Name: 'Jujutsu Kaisen',
+    Author: 'Gege Akutami',
+    Pages: '289',
+  },
+  {
+    Name: 'Naruto',
+    Author: 'Masashi Kishimoto',
+    Pages: '429',
+  },
+];
+
+notificationButton.forEach((item,index) =>{
+  item.addEventListener('click', ()=> {
+    console.log('aha');
+    notificationContainer.style.display = 'block';
+    movePanelLeft.style.display = 'none';
+    movePanelRight.style.display = 'none';
+    layerBackground.style.display = 'block';
+    let parentContainer = notificationContainer;
+    animeContent = document.createElement('div');
+    animeContent.setAttribute('class','anime-content');
+    parentContainer.appendChild(animeContent);
+    let AnimeContentHeader = document.createElement('div');
+    AnimeContentHeader.setAttribute('class','Anime-Header');
+    animeContent.appendChild(AnimeContentHeader);
+    console.log('The clicked item is:', index);
+    const details = detailsContainer[index];
+    if (details) {
+      AnimeContentHeader.textContent = "Name: " + details.Name + ", Author: " + details.Author + ", Pages: " + details.Pages;
+    } else {
+      console.log("hmm");
+    }
+  })
+
+})
 quitNotification.addEventListener('click', () => {
     notificationContainer.style.display = 'none';
     movePanelLeft.style.display = 'block';
     movePanelRight.style.display = 'block';
     layerBackground.style.display = 'none';
+    if(animeContent){
+      animeContent.remove();
+    }
 })
 
 layerBackground.addEventListener('click', () => {
@@ -22,19 +66,35 @@ layerBackground.addEventListener('click', () => {
   movePanelLeft.style.display = 'block';
   movePanelRight.style.display = 'block';
 })
-const movePanelLeft = document.querySelector('.svg-container-left');
-const movePanelRight = document.querySelector('.svg-container-right');
-const library = document.querySelector('.library');
-const libraryItems = Array.from(library.childNodes).filter(node => node.nodeType === Node.ELEMENT_NODE);
+
+let editButton = document.querySelectorAll('#edit');
+const editableElements = document.querySelectorAll('.edit');
+editButton.forEach((item,index) => {
+  item.addEventListener('click', () => {
+    console.log("Clicked element:" + index);
+    let dataIndex = editable.getAttribute('index');
+    let querySelectorString = `.editableElements[index="${dataIndex}"]`;
+    let dataIndexEditables = document.querySelectorAll(querySelectorString);
+    console.log(dataIndexEditables);
+  })
+})
+
+
 let currentIndex = 1;
 movePanelLeft.addEventListener('click', () => {
   currentIndex = (currentIndex - 1 + libraryItems.length) % libraryItems.length;
   updateCarousel();
 });
+
+
+
 movePanelRight.addEventListener('click', () => {
   currentIndex = (currentIndex + 1) % libraryItems.length;
  updateCarousel();
 });
+
+
+
 function updateCarousel() {
   console.log(libraryItems.length);
   libraryItems.forEach((item, index) => {
@@ -44,7 +104,6 @@ function updateCarousel() {
   });
 }
 
-//-------------------------------//
 const insertButton = document.getElementById('insert-book');
 const modalBox = document.querySelector('.modal-block');
 const overlay = document.querySelector('.overlay')
@@ -58,11 +117,16 @@ insertButton.addEventListener('click',() => {
   });
 });
 
-// ------------------------------//
+
+
+
 const imageInput = document.getElementById('image-file');
 const imageName = document.getElementById('placeholder');
 const imagePreview = document.getElementById('image-preview');
 imagePreview.src = '';
+
+
+
 imageInput.addEventListener('change', (e) => {
   const fileList = e.target.files;
   if (fileList.length > 0) {
@@ -80,11 +144,15 @@ imageInput.addEventListener('change', (e) => {
   }
 });
 
+
+
 imageInput.addEventListener('dragover', (e) => {
   e.preventDefault();
   e.stopPropagation();
   e.dataTransfer.dropEffect = 'copy';
 });
+
+
 
 imageInput.addEventListener('drop', (e) => {
   e.preventDefault();
@@ -104,6 +172,9 @@ imageInput.addEventListener('drop', (e) => {
     imagePreview.src = '';
   }
 });
+
+
+
 function readImage(file) {
   if (file instanceof Blob) {
     const fileReader = new FileReader();
@@ -116,7 +187,9 @@ function readImage(file) {
     imagePreview.src = '';
   }
 }
-// ---------------------------- //
+
+
+
 const titleInput = document.getElementById('title');
 const authorInput = document.getElementById('author');
 const pageInput = document.getElementById('pages');

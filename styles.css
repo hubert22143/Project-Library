@@ -35,6 +35,10 @@ body{
     letter-spacing: 0.2rem;
     overflow: hidden;
 }
+.library > * {
+    padding: 15px;
+    margin: 5px;
+}
 .library-item{
     display: flex;
     justify-content: center;
@@ -68,9 +72,9 @@ body{
 }
 .active{
     background-color: tomato;
-    box-shadow: inset 0px 35px 15px 0px rgba(0, 0, 255, 0.3);
+    box-shadow: inset 0px 35px 15px 0px rgba(192,192,192,0.2);
     border: 1px solid black;
-    border-radius: 10px;
+    border-radius: 10px
 }
 img{
     max-width: 100%;
@@ -96,10 +100,6 @@ justify-content: center;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-}
-.notification-container{
-    width: 100%;
-    display: inline-block;
 }
 .notification-box-info {
     border-radius: 10px;
@@ -131,9 +131,6 @@ justify-content: center;
 .notification-title{
     display: flex;
     justify-content: center;
-}
-#notification-button{
-    cursor: pointer;
 }
 .layer{
     display: none;
@@ -329,4 +326,19 @@ button:hover{
     justify-content: center;
     flex-direction: column;
     align-items: center;
+}
+.svg-wrapper{
+    display: flex;
+    justify-content: space-evenly;
+}
+.svg-styles{
+    cursor: pointer;
+    background-color: gainsboro;
+    padding: 30px;
+}
+.svg-styles:hover{
+    background-color: rgba(220,220,220,0.5);
+}
+svg:hover{
+    background-color: rgba(0,0,0,0.1);
 }
