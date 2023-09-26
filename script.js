@@ -56,9 +56,6 @@ quitNotification.addEventListener('click', () => {
     movePanelLeft.style.display = 'block';
     movePanelRight.style.display = 'block';
     layerBackground.style.display = 'none';
-    if(animeContent){
-      animeContent.remove();
-    }
 })
 
 layerBackground.addEventListener('click', () => {
@@ -67,20 +64,50 @@ layerBackground.addEventListener('click', () => {
   movePanelRight.style.display = 'block';
 })
 
-let editButton = document.querySelectorAll('#edit');
-const editableElements = document.querySelectorAll('.edit');
-editButton.forEach((item,index) => {
-  item.addEventListener('click', () => {
-    console.log("Clicked element:" + index);
-    let dataIndex = editable.getAttribute('index');
-    let querySelectorString = `.editableElements[index="${dataIndex}"]`;
-    let dataIndexEditables = document.querySelectorAll(querySelectorString);
-    console.log(dataIndexEditables);
-  })
+let editConfirmButtons = document.querySelectorAll('#confirm-edit');
+let editButtons = document.querySelectorAll('#edit');
+let editableElements = document.querySelectorAll('.editable');
+
+editConfirmButtons.forEach((button, index) => {
+  button.style.display = 'none';
+  button.addEventListener('click', () => {
+    for (let i = 0; i < editableElements.length; i++) {
+      editableElements[i].style.backgroundColor = '';
+      editableElements[i].contentEditable = 'false';
+    }
+    editConfirmButtons[index].style.display = 'none';
+  });
+});
+
+editButtons.forEach((button, index) => {
+  button.addEventListener('click', () => {
+    if (index >= 0 && index < editConfirmButtons.length) {
+      let startIndex = index * 2;
+      let endIndex = startIndex + 2;
+      for (let i = startIndex; i < endIndex && i < editableElements.length; i++) {
+        editableElements[i].style.backgroundColor = 'green';
+        editableElements[i].contentEditable = 'true';
+      }
+      editConfirmButtons[index].style.display = 'block';
+    }
+  });
+});
+
+let removeButton = document.querySelectorAll('#remove');
+removeButton.forEach((item,index) => {
+item.addEventListener('click', () => {
+  let containers = document.querySelectorAll('.library-item');
+  console.log(containers);
+  if (index >= 0 && index < containers.length) {
+    containers[index].remove();
+    updateCarousel();
+    console.log(containers[index]);
+  }
+})
 })
 
-
 let currentIndex = 1;
+let removedIndices = Array.from({ length: libraryItems.length }, (_, index) => index);
 movePanelLeft.addEventListener('click', () => {
   currentIndex = (currentIndex - 1 + libraryItems.length) % libraryItems.length;
   updateCarousel();

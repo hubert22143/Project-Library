@@ -342,3 +342,10 @@ button:hover{
 svg:hover{
     background-color: rgba(0,0,0,0.1);
 }
+.svg-container-end-joined:hover{
+    background-color: rgba(220,220,220,0.5);
+}
+.svg-container-wrap{
+    display: flex;
+    flex-direction: column;
+}
