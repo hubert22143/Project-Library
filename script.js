@@ -35,6 +35,13 @@ notificationButton.forEach((item,index) =>{
     movePanelRight.style.display = 'none';
     layerBackground.style.display = 'block';
     let parentContainer = notificationContainer;
+    quitNotification.addEventListener('click', () => {
+      animeContent.innerHTML = '';
+      notificationContainer.style.display = 'none';
+      movePanelLeft.style.display = 'block';
+      movePanelRight.style.display = 'block';
+      layerBackground.style.display = 'none';
+  })
     animeContent = document.createElement('div');
     animeContent.setAttribute('class','anime-content');
     parentContainer.appendChild(animeContent);
@@ -42,7 +49,7 @@ notificationButton.forEach((item,index) =>{
     AnimeContentHeader.setAttribute('class','Anime-Header');
     animeContent.appendChild(AnimeContentHeader);
     console.log('The clicked item is:', index);
-    const details = detailsContainer[index];
+    let details = detailsContainer[index];
     if (details) {
       AnimeContentHeader.textContent = "Name: " + details.Name + ", Author: " + details.Author + ", Pages: " + details.Pages;
     } else {
@@ -51,12 +58,6 @@ notificationButton.forEach((item,index) =>{
   })
 
 })
-quitNotification.addEventListener('click', () => {
-    notificationContainer.style.display = 'none';
-    movePanelLeft.style.display = 'block';
-    movePanelRight.style.display = 'block';
-    layerBackground.style.display = 'none';
-})
 
 layerBackground.addEventListener('click', () => {
   layerBackground.style.display = 'none';
@@ -64,34 +65,7 @@ layerBackground.addEventListener('click', () => {
   movePanelRight.style.display = 'block';
 })
 
-let editConfirmButtons = document.querySelectorAll('#confirm-edit');
-let editButtons = document.querySelectorAll('#edit');
-let editableElements = document.querySelectorAll('.editable');
 
-editConfirmButtons.forEach((button, index) => {
-  button.style.display = 'none';
-  button.addEventListener('click', () => {
-    for (let i = 0; i < editableElements.length; i++) {
-      editableElements[i].style.backgroundColor = '';
-      editableElements[i].contentEditable = 'false';
-    }
-    editConfirmButtons[index].style.display = 'none';
-  });
-});
-
-editButtons.forEach((button, index) => {
-  button.addEventListener('click', () => {
-    if (index >= 0 && index < editConfirmButtons.length) {
-      let startIndex = index * 2;
-      let endIndex = startIndex + 2;
-      for (let i = startIndex; i < endIndex && i < editableElements.length; i++) {
-        editableElements[i].style.backgroundColor = 'green';
-        editableElements[i].contentEditable = 'true';
-      }
-      editConfirmButtons[index].style.display = 'block';
-    }
-  });
-});
 
 let removeButton = document.querySelectorAll('#remove');
 removeButton.forEach((item,index) => {
@@ -106,7 +80,7 @@ item.addEventListener('click', () => {
 })
 })
 
-let currentIndex = 1;
+let currentIndex = 0;
 let removedIndices = Array.from({ length: libraryItems.length }, (_, index) => index);
 movePanelLeft.addEventListener('click', () => {
   currentIndex = (currentIndex - 1 + libraryItems.length) % libraryItems.length;
@@ -120,14 +94,14 @@ movePanelRight.addEventListener('click', () => {
  updateCarousel();
 });
 
-
-
 function updateCarousel() {
   console.log(libraryItems.length);
+  console.log(currentIndex);
   libraryItems.forEach((item, index) => {
-    const offset = (index - currentIndex) * item.clientWidth;
-    console.log(`Item ${index} Offset: ${offset}px`);
-    item.style.transform = `translateX(${offset}px)`;
+    console.log('Your index:' + index);
+    const offset = (index - currentIndex);
+    const scaleFactor = Math.max(1 - Math.abs(offset) * 0.9, 0.8);
+    item.style.transform = `translateX(${offset * 100}px) scale(${scaleFactor})`;
   });
 }
 
@@ -143,7 +117,6 @@ insertButton.addEventListener('click',() => {
     overlay.style.display = 'none';
   });
 });
-
 
 
 
@@ -243,15 +216,20 @@ function getImageInputValue(){
 const submitValuesToLibrary = document.getElementById('submit');
 const libraryArray = [];
 
-function Book(author, title, pages,image) {
+function Book(author, title, pages,image,status) {
   this.author = author;
   this.title = title;
   this.pages = pages;
   this.image = image;
+  this.status = status;
   this.imageId = generateUniqueImageSrc();
   this.checkboxId = generateUniqueId();
   this.statusDisplayClass = generateUniqueClass();
+  this.statusId = generateUniqueId();
   this.divNewClass = generateUniqueClass();
+}
+function generateUniqueId() {
+  return 'status-' + Math.random().toString(36).substring(2);
 }
 function generateUniqueId() {
   return 'checkbox-' + Math.random().toString(36).substring(2);
@@ -262,11 +240,20 @@ function generateUniqueClass() {
 function generateUniqueImageSrc(){
   return 'image-' + Math.random().toString(36).substring(2);
 }
-
+Book.prototype.status = function(){
+  const statusReaded = document.querySelector(`.${this.statusId}`);
+  if(statusReaded.innerHTML = "Readed"){
+    statusReaded.style.backgroundColor = 'green';
+  }else{
+    statusReaded.style.backgroundColor = 'red';
+  }
+}
+Book.prototype.toggle = function (){
+  this.status = !this.status;
+};
 Book.prototype.marker = function() {
   const statusDisplay = document.querySelector(`.${this.statusDisplayClass}`); 
   const checkbox = document.getElementById(this.checkboxId);
-
   if (checkbox && statusDisplay) {
     checkbox.addEventListener('change', () => {
       if (checkbox.checked) {
@@ -307,6 +294,22 @@ function displayLibrary(libraryArray) {
       statusDisplay.classList.add(newBook.statusDisplayClass);
       statusDisplay.textContent = 'Readed?';
 
+      const buttonDisplay = document.createElement('button');
+      buttonDisplay.classList.add(`${this.statusId}`);
+      buttonDisplay.type = 'button';
+      buttonDisplay.addEventListener('click', (e) => {
+        buttonDisplay.forEach((item) => {
+          item.toggle();
+          item.status();
+          if(this.status){
+            item.innerHTML = "Readed";
+          }else{
+            item.innerHTML = "Unreaded";
+          }
+        });
+
+      })
+
       const imageDisplay = document.createElement('div');
       imageDisplay.classList.add(newBook.divNewClass);
       const imgElement = document.createElement('img');
@@ -324,6 +327,7 @@ function displayLibrary(libraryArray) {
       bookContainer.appendChild(pagesDisplay);
       bookContainer.appendChild(imageDisplay);
       bookContainer.appendChild(statusDisplay);
+      bookContainer.appendChild(buttonDisplay);
       
       if (newBook) {
         newBook.marker();
@@ -382,10 +386,69 @@ submitValuesToLibrary.addEventListener('click', (e) => {
   } else {
     alert('Please fill required data in all fields.');
   }
-
-
   titleInput.value = '';
   authorInput.value = '';
   pageInput.value = '';
   imageValue.value = '';
 });
+let editButtons = document.querySelectorAll('#edit');
+function editButton(){
+  const defaultLibrary = [
+    {
+      title: "Dragon Ball",
+      image: "dragon_ball_image.jpg",
+      info: "Dragon ball is a story...",
+      status: "Readed",
+      author: "SomeGuy :/",
+      pages: '600',
+
+    },
+    {
+      title: "Jujutsu Kaisen",
+      image: "jujutsu_image.jpg",
+      info: "Jujutsu kaisen is a story...",
+      status: "Unreaded",
+      author: "SomeGuy :) ",
+      pages: '600',
+    },
+    {
+      title: "Naruto",
+      image: "naruto_image.jpg",
+      info: "Naruto is a story...",
+      status: "Readed",
+      author: "SomeGuy :D ",
+      pages: '600',
+    },
+  ];
+let editButtons = document.querySelectorAll('#edit');
+let editContainer = document.querySelector('.edit-block-notification');
+let editCancel = document.getElementById('edit-cancel');
+let editTittle = document.getElementById('Edit-Tittle');
+let editInfo = document.getElementById('Edit-Info');
+let editAuthor = document.getElementById('Edit-Author');
+let editPages = document.getElementById('Edit-Pages');
+let editStatus = document.getElementById('Edit-Status');
+let EditImageSrc = document.getElementById('Edit-Image');
+let editImage = document.getElementById('edit-image-preview');
+
+editCancel.addEventListener('click', () => {
+  editContainer.style.display = 'none';
+});
+
+editButtons.forEach((item,index) => {
+  item.addEventListener('click', () => {
+    editContainer.style.display = 'block';
+    let dataChange = defaultLibrary[index];
+    editTittle.value = dataChange.title;
+    editInfo.value = dataChange.info;
+    editAuthor.value = dataChange.author;
+    editPages.value = dataChange.pages;
+    editStatus.value = dataChange.status;
+    EditImageSrc.src = dataChange.image;
+    editImage.src = EditImageSrc.src;
+  });
+
+});
+
+}
+editButton();
