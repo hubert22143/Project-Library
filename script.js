@@ -99,6 +99,8 @@ function updateCarousel() {
   console.log(currentIndex);
   libraryItems.forEach((item, index) => {
     console.log('Your index:' + index);
+    console.log("Library length is equal " + libraryItems.length)
+    console.log(libraryItems);
     const offset = (index - currentIndex);
     const scaleFactor = Math.max(1 - Math.abs(offset) * 0.9, 0.8);
     item.style.transform = `translateX(${offset * 100}px) scale(${scaleFactor})`;
@@ -392,7 +394,7 @@ submitValuesToLibrary.addEventListener('click', (e) => {
   imageValue.value = '';
 });
 let editButtons = document.querySelectorAll('#edit');
-function editButton(){
+function editButton() {
   const defaultLibrary = [
     {
       title: "Dragon Ball",
@@ -401,7 +403,6 @@ function editButton(){
       status: "Readed",
       author: "SomeGuy :/",
       pages: '600',
-
     },
     {
       title: "Jujutsu Kaisen",
@@ -420,35 +421,87 @@ function editButton(){
       pages: '600',
     },
   ];
-let editButtons = document.querySelectorAll('#edit');
-let editContainer = document.querySelector('.edit-block-notification');
-let editCancel = document.getElementById('edit-cancel');
-let editTittle = document.getElementById('Edit-Tittle');
-let editInfo = document.getElementById('Edit-Info');
-let editAuthor = document.getElementById('Edit-Author');
-let editPages = document.getElementById('Edit-Pages');
-let editStatus = document.getElementById('Edit-Status');
-let EditImageSrc = document.getElementById('Edit-Image');
-let editImage = document.getElementById('edit-image-preview');
 
-editCancel.addEventListener('click', () => {
-  editContainer.style.display = 'none';
-});
+  let editButtons = document.querySelectorAll('#edit');
+  let editContainer = document.querySelector('.edit-block-notification');
+  let editCancel = document.getElementById('edit-cancel');
+  let editTittle = document.getElementById('Edit-Tittle');
+  let editInfo = document.getElementById('Edit-Info');
+  let editAuthor = document.getElementById('Edit-Author');
+  let editPages = document.getElementById('Edit-Pages');
+  let editStatus = document.getElementById('Edit-Status');
+  let EditImageSrc = document.getElementById('Edit-Image');
+  let editImage = document.getElementById('edit-image-preview');
+  const editSubmitButton = document.getElementById('edit-submit');
 
-editButtons.forEach((item,index) => {
-  item.addEventListener('click', () => {
-    editContainer.style.display = 'block';
-    let dataChange = defaultLibrary[index];
-    editTittle.value = dataChange.title;
-    editInfo.value = dataChange.info;
-    editAuthor.value = dataChange.author;
-    editPages.value = dataChange.pages;
-    editStatus.value = dataChange.status;
-    EditImageSrc.src = dataChange.image;
-    editImage.src = EditImageSrc.src;
+  editCancel.addEventListener('click', () => {
+    editContainer.style.display = 'none';
   });
 
-});
+  editButtons.forEach((item, index) => {
+    item.addEventListener('click', () => {
+      editContainer.style.display = 'block';
+      let dataChange = defaultLibrary[index];
+      editTittle.value = dataChange.title;
+      editInfo.value = dataChange.info;
+      editAuthor.value = dataChange.author;
+      editPages.value = dataChange.pages;
+      editStatus.value = dataChange.status;
+      EditImageSrc.src = dataChange.image;
+      editImage.src = EditImageSrc.src;
+      editSubmitButton.dataset.index = index;
+    });
+  });
+  editSubmitButton.addEventListener('click', (e) => {
+    e.preventDefault();
+    const editedTitle = editTittle.value;
+    const editedInfo = editInfo.value;
+    const editedAuthor = editAuthor.value;
+    const editedPages = editPages.value;
+    const editedStatus = editStatus.value;
 
+    const index = editSubmitButton.dataset.index;
+
+    const libraryItem = document.getElementById(`library-item-${index}`);
+    libraryItem.querySelector('[data-property="title"]').textContent ='Tittle' + ' ' + editedTitle;
+    libraryItem.querySelector('[data-property="info"]').textContent = 'Info' + ' ' +editedInfo;
+    libraryItem.querySelector('[data-property="author"]').textContent = 'Author' + ' ' +editedAuthor;
+    libraryItem.querySelector('[data-property="pages"]').textContent = 'Pages' + ' ' +editedPages;
+    libraryItem.querySelector('[data-property="status"]').textContent = 'Status' +  ' ' + editedStatus;
+    editContainer.style.display = 'none';
+  });
+  editStatus.addEventListener('change', () => {
+    const selectedOption = editStatus.value;
+    const readedButton = document.querySelector('.readed-button');
+    if (selectedOption === 'Readed') {
+      readedButton.classList.add('readed-button');
+      readedButton.classList.remove('unreaded-button');
+      readedButton.textContent = "Readed";
+    } else if (selectedOption === 'Unreaded') {
+      readedButton.classList.remove('readed-button');
+      readedButton.classList.add('unreaded-button');
+      readedButton.textContent = "Unreaded";
+    }
+  });
 }
 editButton();
+function toggleReadStatus() {
+
+  const readedButtons = document.querySelectorAll('.readed-button');
+  const editStatus = document.getElementById('Edit-Status');
+  readedButtons.forEach((readedButton) => {
+    readedButton.addEventListener('click', () => {
+      if (!readedButton.classList.contains('readed-button')) {
+        readedButton.classList.add('readed-button');
+        readedButton.classList.remove('unreaded-button');
+        readedButton.textContent = "Readed";
+      } else {
+        readedButton.classList.remove('readed-button');
+        readedButton.classList.add('unreaded-button');
+        readedButton.textContent = "Unreaded";
+      }
+    });
+  });
+}
+
+toggleReadStatus();

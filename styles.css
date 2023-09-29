@@ -18,7 +18,6 @@ body{
 }
 .tittle-container{
     display: flex;
-    margin-left: 20px;
     width: 100%;
 }
 .library-title{
@@ -35,10 +34,6 @@ body{
     letter-spacing: 0.2rem;
     overflow: hidden;
 }
-.library > * {
-    padding: 15px;
-    margin: 5px;
-}
 .library-item{
     display: flex;
     justify-content: center;
@@ -49,7 +44,6 @@ body{
     box-shadow: inset 0 0 10px rgba(255, 255, 255, 0.7);
     border: 1px solid silver;
     border-radius: 10px;
-    width: 300px;
 }
 .svg-container-left{
     display: flex;
@@ -85,9 +79,9 @@ display: flex;
 justify-content: center;
 }
 .previous-wrapper{
-    margin-left: 20px;
     display: flex;
     justify-content: center;
+    flex-direction: column;
 }
 .actual-content{
     display: flex;
@@ -330,12 +324,14 @@ button:hover{
 }
 .svg-wrapper{
     display: flex;
-    justify-content: space-evenly;
+    justify-content: space-between;
+    padding: 20px;
 }
 .svg-styles{
     cursor: pointer;
     background-color: gainsboro;
     padding: 30px;
+    border-radius: 5px;
 }
 .svg-styles:hover{
     background-color: rgba(220,220,220,0.5);
@@ -412,4 +408,43 @@ svg:hover{
 #edit-cancel:hover{
     background-color: rgba(128,0,0,0.8);
     border: 1px solid red;
+}
+.readed-button{
+    color: white;
+    background-color: green;
+    border: 1px solid green;
+    
+    box-shadow: 0 0 12px green;
+}
+.unreaded-button{
+    color: white;
+    background-color: red;
+    border: 1px solid red;
+
+    box-shadow: 0 0 12px red;
+}
+.readed-button:hover{
+    background-color: rgba(0,128,0,0.7);
+    border-color: rgba(0, 128, 0, 0.7);
+}
+.unreaded-button:hover{
+    background-color: rgba(128, 0, 0, 0.795);
+    border-color: rgba(128, 0, 0, 0.795);
+}
+.actual-wrapper{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+.next-wrapper{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+.previous-image,.actual-image,.next-image{
+    display: flex;
+    justify-content: center;
+}
+.previous-edited{
+    padding: 20px;
 }
