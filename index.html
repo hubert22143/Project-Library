@@ -10,238 +10,267 @@
     <div class="layer"></div>
     <div class="content-title">
         <div class="library-title">
-            <h1><i>The most recomemended</i></h1>
+            <h1><i>The most recommended</i></h1>
         </div>
         <div class="button-container">
             <div class="text">
-                <h3><i>Try the button below in order to see cool form!</i></h3>
+                <h3><i>Try the button below in order to see the cool form!</i></h3>
             </div>
             <div class="button">
-        <button id="insert-book">Insert your book to library</button>
-    </div>
+                <button id="insert-book">Insert your book to library</button>
+            </div>
+        </div>
     </div>
     <div class="edit-block-notification">
-    <div class="edit-modal-block">
-        <div class="edit-header">
-            <div class="edit-exit">
-            <h2>Edit your book</h2>
-        </div>
+        <div class="edit-modal-block">
+            <div class="edit-header">
+                <div class="edit-exit">
+                    <h2>Edit your book</h2>
+                </div>
+            </div>
             <form>
                 <div class="edit-container">
                     <div class="joiner">
-                    <label for="Edit-Tittle">Tittle</label>
-                    <input type="text" id="Edit-Tittle">
-                </div>
+                        <label for="Edit-Title">Title</label>
+                        <input type="text" id="Edit-Title">
+                    </div>
                     <div class="joiner">
-                    <label for="Edit-Author">Author</label>
-                    <input type="text" id="Edit-Author">
-                </div>
-                <div class="joiner">
-                    <label for="Edit-Info">Info</label>
-                    <textarea id="Edit-Info">
-                    </textarea>
-                    
-                </div>
+                        <label for="Edit-Author">Author</label>
+                        <input type="text" id="Edit-Author">
+                    </div>
                     <div class="joiner">
-                    <label for="Edit-Pages">Pages</label>
-                    <input type="text" id="Edit-Pages">
-                </div>
+                        <label for="Edit-Info">Info</label>
+                        <textarea id="Edit-Info"></textarea>
+                    </div>
                     <div class="joiner">
-                    <label for="Edit-Status">Status</label>
-                    <select id="Edit-Status">
-                        <option>Readed</option>
-                        <option>Unreaded</option>
-                    </select>
-                </div>
+                        <label for="Edit-Pages">Pages</label>
+                        <input type="text" id="Edit-Pages">
+                    </div>
                     <div class="joiner">
-                    <label for="Edit-Image"></label>
-                    <input type="file" class="Edit-Image-Style" id="Edit-Image" accept=".jpg,.jpeg,.png">
-                    <div class="Edit-Preview">
-                        <p>Image Preview</p>
-                        <img src="" id="edit-image-preview"">
+                        <label for="Edit-Status">Status</label>
+                        <select id="Edit-Status">
+                            <option value="Readed">Readed</option>
+                            <option value="Unreaded">Unreaded</option>
+                        </select>
+                    </div>
+                    <div class="joiner">
+                        <label for="Edit-Image">Image</label>
+                        <input type="file" class="Edit-Image-Style" id="Edit-Image" accept=".jpg, .jpeg, .png">
+                        <div class="Edit-Preview">
+                            <p>Image Preview</p>
+                            <img src="" id="edit-image-preview" width="300" height="200">
+                        </div>
                     </div>
                     <div class="edit-wrap">
-                    <div class="joiner">
-                        <label for="edit-submit"></label>
+                        <div class="joiner">
                             <button type="submit" id="edit-submit">Submit</button>
+                        </div>
+                        <div class="joiner">
+                            <button type="button" id="edit-cancel">Cancel</button>
+                        </div>
                     </div>
-                    <div class="joiner">
-                        <label for="edit-cancel"></label>
-                        <button type="button" id="edit-cancel">Cancel</button>
-                    </div>
-                </div>
-                </div>
                 </div>
             </form>
         </div>
     </div>
-</div>
-        <div class="modal-block">
+    <div class="modal-block">
         <div class="library-check">
             <div class="library-exit">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" height="50px" width="50px" class="modal-svg-style" id="modal-library-exit"><title>file-excel-box</title><path d="M16.2,17H14.2L12,13.2L9.8,17H7.8L11,12L7.8,7H9.8L12,10.8L14.2,7H16.2L13,12M19,3H5C3.89,3 3,3.89 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V5C21,3.89 20.1,3 19,3Z" /></svg>
             </div>
-            <div class="tittle-container">
-            <h1>Create your own manga!</h1>
-        </div>
+            <div class="title-container">
+                <h1>Create your own manga!</h1>
+            </div>
             <form>
                 <div class="container">
-                    <div class="flex-form-holder"> 
-                <div class="form-container">
-                <label for="title">*Title</label>
-                <input type="text" id="title" required>
-            </div>
-            <div class="form-container">
-                <label for="author">*Author</label>
-                <input type="text" id="author" required>
-            </div>
-            <div class="form-container">
-                <label for="pages">*Pages</label>
-                <input type="number" id="pages">
-            </div>
-            <div class="form-container">
-                <label for="readed">*Readed</label>
-                <select id="">
-                    <option value="Readed">Readed</option>
-                    <option value="Unreaded">Unreaded</option>
-                </select>
-            </div>
-            <div class="form-container image">
-                <label for="image-file">*Drop the image, or click to select it!</label>
-                <br>
-                <span id="placeholder">Selected file: </span>
-                <input type="file" class="image-file-style" id="image-file" accept=".jpg,.jpeg,.png" required>
-                <div class="image-preview">
-                    <label for="image-preview">Preview your selected image</label>
-                <img src="" id="image-preview" width="300" height="200">
-            </div>
-            </div>
-        </div>
-        </div>
-        <div class="button-container">
-            <div class="bt-cnt">
-            <button type="submit" id="submit">Add to preview library</button>
-            <button type="reset">Reset</button>
-        </div>
-            <div class="required-fields">
-                * - Required fields
-            </div>
-        </div>
+                    <div class="flex-form-holder">
+                        <div class="form-container">
+                            <label for="title">*Title</label>
+                            <input type="text" id="title" required>
+                        </div>
+                        <div class="form-container">
+                            <label for="author">*Author</label>
+                            <input type="text" id="author" required>
+                        </div>
+                        <div class="form-container">
+                            <label for="pages">*Pages</label>
+                            <input type="number" id="pages">
+                        </div>
+                        <div class="form-container">
+                            <label for="readed">*Readed</label>
+                            <select id="readed">
+                                <option value="Readed">Readed</option>
+                                <option value="Unreaded">Unreaded</option>
+                            </select>
+                        </div>
+                        <div class="form-container image">
+                            <label for="image-file">*Drop the image, or click to select it!</label>
+                            <br>
+                            <span id="placeholder">Selected file: </span>
+                            <input type="file" class="image-file-style" id="image-file" accept=".jpg, .jpeg, .png" required>
+                            <div class="image-preview">
+                                <label for="image-preview">Preview your selected image</label>
+                                <img src="" id="image-preview" width="300" height="200">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="button-container">
+                    <div class="bt-cnt">
+                        <button type="submit" id="submit">Add manga to library</button>
+                        <button type="reset">Reset</button>
+                    </div>
+                    <div class="required-fields">
+                        * - Required fields
+                    </div>
+                </div>
             </form>
         </div>
-        <div class="library-show">
-            <div class="library-title">
-            <h2>Library</h2>
-        </div>
-        <div class="book-container">    
-
-        </div>
-
-        </div>
-        
     </div>
-</div>
-<div class="overlay" id="overlay"></div>
+    <div class="overlay" id="overlay"></div>
     <div class="content">
         <div class="svg-container">
             <div class="svg-container-left">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" height="50px" width="50px" id="button-left"><title>arrow-left-bold</title><path d="M20,9V15H12V19.84L4.16,12L12,4.16V9H20Z" /></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" height="50px" width="50px" id="button-left">
+                    <title>arrow-left-bold</title>
+                    <path d="M20,9V15H12V19.84L4.16,12L12,4.16V9H20Z" />
+                </svg>
             </div>
         </div>
         <div class="library" id="main-library">
-            <div class="library-item inactive" id="library-item-0">
+            <div class="library-item" id="library-item-0">
                 <div class="previous-content">
                     <div class="svg-wrapper">
-                    <div class="notification-container">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" height="50px" id="information-about" class="svg-styles"><title>information-variant-box</title><path d="M5 3H19C20.1 3 21 3.89 21 5V19C21 19.53 20.79 20.04 20.41 20.41C20.04 20.79 19.53 21 19 21H5C4.47 21 3.96 20.79 3.59 20.41C3.21 20.04 3 19.53 3 19V5C3 3.89 3.89 3 5 3M12.3 7.29C12.11 7.5 12 7.74 12 8C12 8.27 12.11 8.5 12.3 8.71C12.5 8.9 12.74 9 13 9C13.27 9 13.5 8.9 13.71 8.71C13.9 8.5 14 8.27 14 8C14 7.74 13.9 7.5 13.71 7.29C13.5 7.11 13.27 7 13 7C12.74 7 12.5 7.11 12.3 7.29M9.8 11.97C9.7 12.06 9.7 12.07 9.77 12.17L9.82 12.25L9.85 12.31C9.92 12.44 9.93 12.44 10.04 12.36C10.17 12.27 10.39 12.13 10.76 11.91C11.68 11.32 11.5 12 11.09 13.5C10.87 14.33 10.59 15.39 10.38 16.62C10.14 18.37 11.71 17.47 12.12 17.2C12.5 16.96 13.44 16.3 13.66 16.15L13.7 16.13C13.82 16.04 13.77 16 13.68 15.86L13.62 15.78C13.54 15.67 13.46 15.75 13.46 15.75L13.3 15.86C12.85 16.16 12.23 16.59 12.13 16.25C12.04 16 12.41 14.64 12.79 13.25C12.96 12.64 13.13 12 13.26 11.47L13.28 11.41C13.35 10.97 13.5 10.12 12.77 10.18C11.97 10.25 9.8 11.97 9.8 11.97Z" />
-                        </svg>
+                        <div class="notification-container">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" height="50px" width="50px" id="information-about" class="svg-styles notification-box-item">
+                                <title>information-variant-box</title>
+                                <path d="M5 3H19C20.1 3 21 3.89 21 5V19C21 19.53 20.79 20.04 20.41 20.41C20.04 20.79 19.53 21 19 21H5C4.47 21 3.96 20.79 3.59 20.41C3.21 20.04 3 19.53 3 19V5C3 3.89 3.89 3 5 3M12.3 7.29C12.11 7.5 12 7.74 12 8C12 8.27 12.11 8.5 12.3 8.71C12.5 8.9 12.74 9 13 9C13.27 9 13.5 8.9 13.71 8.71C13.9 8.5 14 8.27 14 8C14 7.74 13.9 7.5 13.71 7.29C13.5 7.11 13.27 7 13 7C12.74 7 12.5 7.11 12.3 7.29M9.8 11.97C9.7 12.06 9.7 12.07 9.77 12.17L9.82 12.25L9.85 12.31C9.92 12.44 9.93 12.44 10.04 12.36C10.17 12.27 10.39 12.13 10.76 11.91C11.68 11.32 11.5 12 11.09 13.5C10.87 14.33 10.59 15.39 10.38 16.62C10.14 18.37 11.71 17.47 12.12 17.2C12.5 16.96 13.44 16.3 13.66 16.15L13.7 16.13C13.82 16.04 13.77 16 13.68 15.86L13.62 15.78C13.54 15.67 13.46 15.75 13.46 15.75L13.3 15.86C12.85 16.16 12.23 16.59 12.13 16.25C12.04 16 12.41 14.64 12.79 13.25C12.96 12.64 13.13 12 13.26 11.47L13.28 11.41C13.35 10.97 13.5 10.12 12.77 10.18C11.97 10.25 9.8 11.97 9.8 11.97Z" />
+                            </svg>
+                        </div>
+                        <div class="svg-container-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" height="50px" width="50px" id="remove" class="svg-styles">
+                                <title>trash-can</title>
+                                <path d="M9,3V4H4V6H5V19A2,2 0 0,0 7,21H17A2,2 0 0,0 19,19V6H20V4H15V3H9M9,8H11V17H9V8M13,8H15V17H13V8Z" />
+                            </svg>
+                        </div>
+                        <div class="svg-container-wrap">
+                            <div class="svg-container-end">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" height="50px" width="50px" id="edit" class="svg-styles">
+                                    <title>file-edit</title>
+                                    <path d="M6 2C4.9 2 4 2.9 4 4V20C4 21.1 4.9 22 6 22H10V20.1L20 10.1V8L14 2H6M13 3.5L18.5 9H13V3.5M20.1 13C20 13 19.8 13.1 19.7 13.2L18.7 14.2L20.8 16.3L21.8 15.3C22 15.1 22 14.7 21.8 14.5L20.5 13.2C20.4 13.1 20.3 13 20.1 13M18.1 14.8L12 20.9V23H14.1L20.2 16.9L18.1 14.8Z" />
+                                </svg>
+                            </div>
+                            <div class="svg-container-end-joined">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" height="50px" width="50px" id="confirm-edit" class="svg-styles">
+                                    <title>message-check</title>
+                                    <path d="M20 2H4C2.9 2 2 2.9 2 4V22L6 18H20C21.11 18 22 17.11 22 16V4C22 2.89 21.1 2 20 2M10.47 14L7 10.5L8.4 9.09L10.47 11.17L15.6 6L17 7.41L10.47 14Z" />
+                                </svg>
+                            </div>
+                        </div>
                     </div>
-                    <div class="svg-container-center">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" height="50px" width="50px" id="remove" class="svg-styles"><title>trash-can</title><path d="M9,3V4H4V6H5V19A2,2 0 0,0 7,21H17A2,2 0 0,0 19,19V6H20V4H15V3H9M9,8H11V17H9V8M13,8H15V17H13V8Z" /></svg>
-                    </div>
-                    <div class="svg-container-wrap">
-                    <div class="svg-container-end">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" height="50px" width="50px" id="edit" class="svg-styles"><title>file-edit</title><path d="M6 2C4.9 2 4 2.9 4 4V20C4 21.1 4.9 22 6 22H10V20.1L20 10.1V8L14 2H6M13 3.5L18.5 9H13V3.5M20.1 13C20 13 19.8 13.1 19.7 13.2L18.7 14.2L20.8 16.3L21.8 15.3C22 15.1 22 14.7 21.8 14.5L20.5 13.2C20.4 13.1 20.3 13 20.1 13M18.1 14.8L12 20.9V23H14.1L20.2 16.9L18.1 14.8Z" /></svg>
-                    </div>
-                    <div class="svg-container-end-joined">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" height="50px" width="50px" id="confirm-edit" class="svg-styles"><title>message-check</title><path d="M20 2H4C2.9 2 2 2.9 2 4V22L6 18H20C21.11 18 22 17.11 22 16V4C22 2.89 21.1 2 20 2M10.47 14L7 10.5L8.4 9.09L10.47 11.17L15.6 6L17 7.41L10.47 14Z" /></svg>
+                    <div class="previous-header editable" data-index="0" data-property="title">Title: Dragon Ball</div>
+                    <div class="previous-wrapper">
+                        <div class="previous-image">
+                            <img src="dragon_ball_image.jpg" id="a1" data-index="0" data-property="image">
+                        </div>
+                        <div class="previous-edited">
+                            <div class="previous-info editable" data-index="0" data-property="info">Info: Dragon Ball is a story...</div>
+                            <div class="pages-read" data-index="0" data-property="pages">Pages: Read pages: 400 / <span>500</span></div>
+                            <div class="status-read" data-index="0" data-property="status">Status: <button data-index="0" data-property="status" class="readed-button" id="readed-button">Read</button></div>
+                            <div class="author-page" data-index="0" data-property="author">Author: Hiroyima</div>
+                        </div>
                     </div>
                 </div>
-                    </div>
-                <div class="previous-header editable" data-index="0" data-property="title">Tittle:Dragon Ball</div>
-                <div class="previous-wrapper">
-                <div class="previous-image">
-                    <img src="dragon_ball_image.jpg" id="a1" data-index="0" data-property="image">
-                </div>
-                <div class="previous-edited">
-                <div class="previous-info editable" data-index="0" data-property="info">Info:Dragon ball is a story...</div>
-                <div class="pages-readed" data-index="0" data-property="pages">Pages: Readed pages: 400 / <span> 500</span></div>
-                <div class="status-readed" >Status:<button data-index="0" data-property="status" class="readed-button" id="readed-button">Readed</button></div>
-                <div class="author-page" data-index="0" data-property="author">Author:Hiroyima</div>
-                </div>
             </div>
-            </div>
-            </div>
-            <div class="library-item active" id="library-item-1">
+            <div class="library-item" id="library-item-1">
                 <div class="actual-content">
                     <div class="svg-wrapper">
                         <div class="notification-container">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" height="50px" id="information-about" class="svg-styles"><title>information-variant-box</title><path d="M5 3H19C20.1 3 21 3.89 21 5V19C21 19.53 20.79 20.04 20.41 20.41C20.04 20.79 19.53 21 19 21H5C4.47 21 3.96 20.79 3.59 20.41C3.21 20.04 3 19.53 3 19V5C3 3.89 3.89 3 5 3M12.3 7.29C12.11 7.5 12 7.74 12 8C12 8.27 12.11 8.5 12.3 8.71C12.5 8.9 12.74 9 13 9C13.27 9 13.5 8.9 13.71 8.71C13.9 8.5 14 8.27 14 8C14 7.74 13.9 7.5 13.71 7.29C13.5 7.11 13.27 7 13 7C12.74 7 12.5 7.11 12.3 7.29M9.8 11.97C9.7 12.06 9.7 12.07 9.77 12.17L9.82 12.25L9.85 12.31C9.92 12.44 9.93 12.44 10.04 12.36C10.17 12.27 10.39 12.13 10.76 11.91C11.68 11.32 11.5 12 11.09 13.5C10.87 14.33 10.59 15.39 10.38 16.62C10.14 18.37 11.71 17.47 12.12 17.2C12.5 16.96 13.44 16.3 13.66 16.15L13.7 16.13C13.82 16.04 13.77 16 13.68 15.86L13.62 15.78C13.54 15.67 13.46 15.75 13.46 15.75L13.3 15.86C12.85 16.16 12.23 16.59 12.13 16.25C12.04 16 12.41 14.64 12.79 13.25C12.96 12.64 13.13 12 13.26 11.47L13.28 11.41C13.35 10.97 13.5 10.12 12.77 10.18C11.97 10.25 9.8 11.97 9.8 11.97Z" />
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" height="50px" width="50px" id="information-about" class="svg-styles notification-box-item">
+                                <title>information-variant-box</title>
+                                <path d="M5 3H19C20.1 3 21 3.89 21 5V19C21 19.53 20.79 20.04 20.41 20.41C20.04 20.79 19.53 21 19 21H5C4.47 21 3.96 20.79 3.59 20.41C3.21 20.04 3 19.53 3 19V5C3 3.89 3.89 3 5 3M12.3 7.29C12.11 7.5 12 7.74 12 8C12 8.27 12.11 8.5 12.3 8.71C12.5 8.9 12.74 9 13 9C13.27 9 13.5 8.9 13.71 8.71C13.9 8.5 14 8.27 14 8C14 7.74 13.9 7.5 13.71 7.29C13.5 7.11 13.27 7 13 7C12.74 7 12.5 7.11 12.3 7.29M9.8 11.97C9.7 12.06 9.7 12.07 9.77 12.17L9.82 12.25L9.85 12.31C9.92 12.44 9.93 12.44 10.04 12.36C10.17 12.27 10.39 12.13 10.76 11.91C11.68 11.32 11.5 12 11.09 13.5C10.87 14.33 10.59 15.39 10.38 16.62C10.14 18.37 11.71 17.47 12.12 17.2C12.5 16.96 13.44 16.3 13.66 16.15L13.7 16.13C13.82 16.04 13.77 16 13.68 15.86L13.62 15.78C13.54 15.67 13.46 15.75 13.46 15.75L13.3 15.86C12.85 16.16 12.23 16.59 12.13 16.25C12.04 16 12.41 14.64 12.79 13.25C12.96 12.64 13.13 12 13.26 11.47L13.28 11.41C13.35 10.97 13.5 10.12 12.77 10.18C11.97 10.25 9.8 11.97 9.8 11.97Z" />
                             </svg>
                         </div>
                         <div class="svg-container-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" height="50px" width="50px" id="remove" class="svg-styles"><title>trash-can</title><path d="M9,3V4H4V6H5V19A2,2 0 0,0 7,21H17A2,2 0 0,0 19,19V6H20V4H15V3H9M9,8H11V17H9V8M13,8H15V17H13V8Z" /></svg>
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" height="50px" width="50px" id="remove" class="svg-styles">
+                                <title>trash-can</title>
+                                <path d="M9,3V4H4V6H5V19A2,2 0 0,0 7,21H17A2,2 0 0,0 19,19V6H20V4H15V3H9M9,8H11V17H9V8M13,8H15V17H13V8Z" />
+                            </svg>
                         </div>
                         <div class="svg-container-wrap">
                             <div class="svg-container-end">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" height="50px" width="50px" id="edit" class="svg-styles"><title>file-edit</title><path d="M6 2C4.9 2 4 2.9 4 4V20C4 21.1 4.9 22 6 22H10V20.1L20 10.1V8L14 2H6M13 3.5L18.5 9H13V3.5M20.1 13C20 13 19.8 13.1 19.7 13.2L18.7 14.2L20.8 16.3L21.8 15.3C22 15.1 22 14.7 21.8 14.5L20.5 13.2C20.4 13.1 20.3 13 20.1 13M18.1 14.8L12 20.9V23H14.1L20.2 16.9L18.1 14.8Z" /></svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" height="50px" width="50px" id="edit" class="svg-styles">
+                                    <title>file-edit</title>
+                                    <path d="M6 2C4.9 2 4 2.9 4 4V20C4 21.1 4.9 22 6 22H10V20.1L20 10.1V8L14 2H6M13 3.5L18.5 9H13V3.5M20.1 13C20 13 19.8 13.1 19.7 13.2L18.7 14.2L20.8 16.3L21.8 15.3C22 15.1 22 14.7 21.8 14.5L20.5 13.2C20.4 13.1 20.3 13 20.1 13M18.1 14.8L12 20.9V23H14.1L20.2 16.9L18.1 14.8Z" />
+                                </svg>
                             </div>
                             <div class="svg-container-end-joined">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" height="50px" width="50px" id="confirm-edit" class="svg-styles"><title>message-check</title><path d="M20 2H4C2.9 2 2 2.9 2 4V22L6 18H20C21.11 18 22 17.11 22 16V4C22 2.89 21.1 2 20 2M10.47 14L7 10.5L8.4 9.09L10.47 11.17L15.6 6L17 7.41L10.47 14Z" /></svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" height="50px" width="50px" id="confirm-edit" class="svg-styles">
+                                    <title>message-check</title>
+                                    <path d="M20 2H4C2.9 2 2 2.9 2 4V22L6 18H20C21.11 18 22 17.11 22 16V4C22 2.89 21.1 2 20 2M10.47 14L7 10.5L8.4 9.09L10.47 11.17L15.6 6L17 7.41L10.47 14Z" />
+                                </svg>
                             </div>
                         </div>
-                        </div>
-                    <div class="actual-header editable" data-index="1" data-property="title">Tittle:Jujutsu Kaisen</div>
+                    </div>
+                    <div class="actual-header editable" data-index="1" data-property="title">Title: Jujutsu Kaisen</div>
                     <div class="actual-wrapper">
-                    <div class="actual-image"><img src="jujutsu_image.jpg" id="a2" data-index="1" data-property="image"></div>
-                    <div class="actual-info editable" data-index="1" data-property="info">Info:Jujutsu kaisen is a ...</div>
-                    <div class="pages-readed" data-index="1" data-property="pages">Pages:Readed pages: 400 / <span> 500</span></div>
-                    <div class="status-readed" >Status : <button data-index="1" data-property="status" class="readed-button" id="readed-button">Readed</button></div>
-                    <div class="author-page" data-index="1" data-property="author">Author:Akoshima</div>
-                </div>
+                        <div class="actual-image"><img src="jujutsu_image.jpg" id="a2" data-index="1" data-property="image"></div>
+                        <div class="actual-info editable" data-index="1" data-property="info">Info: Jujutsu Kaisen is a ...</div>
+                        <div class="pages-read" data-index="1" data-property="pages">Pages: Read pages: 400 / <span>500</span></div>
+                        <div class="status-read" data-index="1" data-property="status">Status: <button data-index="1" data-property="status" class="readed-button" id="readed-button">Read</button></div>
+                        <div class="author-page" data-index="1" data-property="author">Author: Akoshima</div>
+                    </div>
                 </div>
             </div>
-            <div class="library-item inactive" id="library-item-2">
+            <div class="library-item" id="library-item-2">
                 <div class="next-content">
                     <div class="svg-wrapper">
                         <div class="notification-container">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" height="50px" id="information-about" class="svg-styles"><title>information-variant-box</title><path d="M5 3H19C20.1 3 21 3.89 21 5V19C21 19.53 20.79 20.04 20.41 20.41C20.04 20.79 19.53 21 19 21H5C4.47 21 3.96 20.79 3.59 20.41C3.21 20.04 3 19.53 3 19V5C3 3.89 3.89 3 5 3M12.3 7.29C12.11 7.5 12 7.74 12 8C12 8.27 12.11 8.5 12.3 8.71C12.5 8.9 12.74 9 13 9C13.27 9 13.5 8.9 13.71 8.71C13.9 8.5 14 8.27 14 8C14 7.74 13.9 7.5 13.71 7.29C13.5 7.11 13.27 7 13 7C12.74 7 12.5 7.11 12.3 7.29M9.8 11.97C9.7 12.06 9.7 12.07 9.77 12.17L9.82 12.25L9.85 12.31C9.92 12.44 9.93 12.44 10.04 12.36C10.17 12.27 10.39 12.13 10.76 11.91C11.68 11.32 11.5 12 11.09 13.5C10.87 14.33 10.59 15.39 10.38 16.62C10.14 18.37 11.71 17.47 12.12 17.2C12.5 16.96 13.44 16.3 13.66 16.15L13.7 16.13C13.82 16.04 13.77 16 13.68 15.86L13.62 15.78C13.54 15.67 13.46 15.75 13.46 15.75L13.3 15.86C12.85 16.16 12.23 16.59 12.13 16.25C12.04 16 12.41 14.64 12.79 13.25C12.96 12.64 13.13 12 13.26 11.47L13.28 11.41C13.35 10.97 13.5 10.12 12.77 10.18C11.97 10.25 9.8 11.97 9.8 11.97Z" />
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" height="50px" width="50px" id="information-about" class="svg-styles notification-box-item">
+                                <title>information-variant-box</title>
+                                <path d="M5 3H19C20.1 3 21 3.89 21 5V19C21 19.53 20.79 20.04 20.41 20.41C20.04 20.79 19.53 21 19 21H5C4.47 21 3.96 20.79 3.59 20.41C3.21 20.04 3 19.53 3 19V5C3 3.89 3.89 3 5 3M12.3 7.29C12.11 7.5 12 7.74 12 8C12 8.27 12.11 8.5 12.3 8.71C12.5 8.9 12.74 9 13 9C13.27 9 13.5 8.9 13.71 8.71C13.9 8.5 14 8.27 14 8C14 7.74 13.9 7.5 13.71 7.29C13.5 7.11 13.27 7 13 7C12.74 7 12.5 7.11 12.3 7.29M9.8 11.97C9.7 12.06 9.7 12.07 9.77 12.17L9.82 12.25L9.85 12.31C9.92 12.44 9.93 12.44 10.04 12.36C10.17 12.27 10.39 12.13 10.76 11.91C11.68 11.32 11.5 12 11.09 13.5C10.87 14.33 10.59 15.39 10.38 16.62C10.14 18.37 11.71 17.47 12.12 17.2C12.5 16.96 13.44 16.30 13.66 16.15L13.7 16.13C13.82 16.04 13.77 16.00 13.68 15.86L13.62 15.78C13.54 15.67 13.46 15.75 13.46 15.75L13.3 15.86C12.85 16.16 12.23 16.59 12.13 16.25C12.04 16.00 12.41 14.64 12.79 13.25C12.96 12.64 13.13 12.00 13.26 11.47L13.28 11.41C13.35 10.97 13.5 10.12 12.77 10.18C11.97 10.25 9.8 11.97 9.8 11.97Z" />
                             </svg>
                         </div>
                         <div class="svg-container-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" height="50px" width="50px" id="remove" class="svg-styles"><title>trash-can</title><path d="M9,3V4H4V6H5V19A2,2 0 0,0 7,21H17A2,2 0 0,0 19,19V6H20V4H15V3H9M9,8H11V17H9V8M13,8H15V17H13V8Z" /></svg>
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" height="50px" width="50px" id="remove" class="svg-styles">
+                                <title>trash-can</title>
+                                <path d="M9,3V4H4V6H5V19A2,2 0 0,0 7,21H17A2,2 0 0,0 19,19V6H20V4H15V3H9M9,8H11V17H9V8M13,8H15V17H13V8Z" />
+                            </svg>
                         </div>
                         <div class="svg-container-wrap">
                             <div class="svg-container-end">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" height="50px" width="50px" id="edit" class="svg-styles"><title>file-edit</title><path d="M6 2C4.9 2 4 2.9 4 4V20C4 21.1 4.9 22 6 22H10V20.1L20 10.1V8L14 2H6M13 3.5L18.5 9H13V3.5M20.1 13C20 13 19.8 13.1 19.7 13.2L18.7 14.2L20.8 16.3L21.8 15.3C22 15.1 22 14.7 21.8 14.5L20.5 13.2C20.4 13.1 20.3 13 20.1 13M18.1 14.8L12 20.9V23H14.1L20.2 16.9L18.1 14.8Z" /></svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" height="50px" width="50px" id="edit" class="svg-styles">
+                                    <title>file-edit</title>
+                                    <path d="M6 2C4.9 2 4 2.9 4 4V20C4 21.1 4.9 22 6 22H10V20.1L20 10.1V8L14 2H6M13 3.5L18.5 9H13V3.5M20.1 13C20 13 19.8 13.1 19.7 13.2L18.7 14.2L20.8 16.3L21.8 15.3C22 15.1 22 14.7 21.8 14.5L20.5 13.2C20.4 13.1 20.3 13 20.1 13M18.1 14.8L12 20.9V23H14.1L20.2 16.9L18.1 14.8Z" />
+                                </svg>
                             </div>
                             <div class="svg-container-end-joined">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" height="50px" width="50px" id="confirm-edit" class="svg-styles"><title>message-check</title><path d="M20 2H4C2.9 2 2 2.9 2 4V22L6 18H20C21.11 18 22 17.11 22 16V4C22 2.89 21.1 2 20 2M10.47 14L7 10.5L8.4 9.09L10.47 11.17L15.6 6L17 7.41L10.47 14Z" /></svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" height="50px" width="50px" id="confirm-edit" class="svg-styles">
+                                    <title>message-check</title>
+                                    <path d="M20 2H4C2.9 2 2 2.9 2 4V22L6 18H20C21.11 18 22 17.11 22 16V4C22 2.89 21.1 2 20 2M10.47 14L7 10.5L8.4 9.09L10.47 11.17L15.6 6L17 7.41L10.47 14Z" />
+                                </svg>
                             </div>
                         </div>
-                        </div>
-                    <div class="next-header editable" data-index="2" data-property="title">Tittle:Naruto</div>
+                    </div>
+                    <div class="next-header editable" data-index="2" data-property="title">Title: Naruto</div>
                     <div class="next-wrapper">
-                    <div class="next-image"><img src="naruto_image.jpg" id="a3" data-index="2" data-property="image"></div>
-                    <div class="next-info editable" data-index="2" data-property="info">Info:Naruto is a ... </div>
-                    <div class="pages-readed" data-index="2" data-property="pages">Pages:Readed pages: 400 / <span> 500</span></div>
-                    <div class="status-readed" >Status : <button data-index="2" data-property="status" class="readed-button" id="unreaded-button">Readed</button></div>
-                    <div class="author-page" data-index="2" data-property="author">Author: Sarutoshi</div>
-                    
+                        <div class="next-image"><img src="naruto_image.jpg" id="a3" data-index="2" data-property="image"></div>
+                        <div class="next-info editable" data-index="2" data-property="info">Info: Naruto is a ...</div>
+                        <div class="pages-read" data-index="2" data-property="pages">Pages: Read pages: 400 / <span>500</span></div>
+                        <div class="status-read" data-index="2" data-property="status">Status: <button data-index="2" data-property="status" class="readed-button" id="readed-button">Read</button></div>
+                        <div class="author-page" data-index="2" data-property="author">Author: Oda</div>
+                    </div>
                 </div>
             </div>
         </div>
-
+        <div class="svg-container">
+            <div class="svg-container-right">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id="button-right"><title>arrow-right-bold</title><path d="M4,15V9H12V4.16L19.84,12L12,19.84V15H4Z" /></svg>
+                </div>
+            </div>
+        </div>
+    </div>
+    
     </div>
     <div class="notification-box-info">
         <div class="container-box-info">
@@ -253,12 +282,6 @@
 
             </div>
       
-    </div>
-    <div class="svg-container">
-        <div class="svg-container-right">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id="button-right"><title>arrow-right-bold</title><path d="M4,15V9H12V4.16L19.84,12L12,19.84V15H4Z" /></svg>
-            </div>
-        </div>
     </div>
     
     <script src="script.js"></script>
