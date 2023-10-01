@@ -25,6 +25,34 @@ function hideNotification() {
   layerBackground.style.display = 'none';
 }
 
+function showCreateLibrary() {
+  const showInsertBlock = document.querySelector('.modal-block');
+  if (showInsertBlock.style.display === 'block') {
+    showInsertBlock.style.display = 'none';
+  } else {
+    showInsertBlock.style.display = 'block';
+  }
+}
+function exitFromLibrary(){
+  const exitLibrary = document.getElementById('modal-library-exit');
+  const showInsertBlock = document.querySelector('.modal-block');
+  exitLibrary.addEventListener('click', () => {
+    if(showInsertBlock.style.display = 'block'){
+      showInsertBlock.style.display = 'none';
+    }
+  })
+}
+exitFromLibrary();
+
+function hideInfoAnime(){
+  const container = document.querySelector('.notification-box-info');
+  const layer = document.querySelector('.layer');
+  if(container.style.display = 'block'){
+    container.style.display = 'none';
+    layer.style.display = 'none';
+  }
+}
+
 function removeLibraryItem(index) {
   const libraryItems = document.querySelectorAll('.library-item');
 
@@ -37,9 +65,21 @@ function removeLibraryItem(index) {
 
 function updateCarousel() {
   const libraryItems = document.querySelectorAll('.library-item');
+   const librarySquareActive = document.querySelectorAll('.moving');
   let currentIndex = 0;
 
+
+  function updateLibrarySquare(){
+    librarySquareActive.forEach((item,index) => {
+      if(index === currentIndex){
+        item.classList.add('customed');
+      }else{
+        item.classList.remove('customed');
+      }
+    })
+  }
   function updateLibraryItems(){
+    updateLibrarySquare();
     libraryItems.forEach((item,index) => {
       if(index === currentIndex){
         item.classList.add('active');
@@ -62,11 +102,13 @@ function updateCarousel() {
     showItem(currentIndex);
     updateLibraryItems()
   }
+  
   function moveLeft(){
     currentIndex = (currentIndex - 1 + libraryItems.length) % libraryItems.length;
     showItem(currentIndex);
     updateLibraryItems()
   }
+
 
   const previousButton = document.getElementById('button-left');
   previousButton.addEventListener('click', moveLeft);
@@ -76,14 +118,12 @@ function updateCarousel() {
 }
 updateCarousel();
 
-
 function validateFormInputs() {
   const titleInput = document.getElementById('title');
   const authorInput = document.getElementById('author');
   const pageInput = document.getElementById('pages');
+  const readSelector = document.getElementById('readed');
   const imageInput = document.getElementById('image-file');
-  const imageName = document.getElementById('placeholder');
-  const imagePreview = document.getElementById('image-preview');
 
   const titleValue = titleInput.value.trim();
   const authorValue = authorInput.value.trim();
@@ -118,8 +158,36 @@ function createBook() {
 
 function addToLibrary(newBook) {
   const libraryArray = [];
+  console.log(libraryArray);
   libraryArray.push(newBook);
+  createLibraryDom(libraryArray);
 }
+function createLibraryDom(libraryArray) {
+  const libraryContainer = document.getElementById('main-library');
+  let currentIndex = 3;
+
+  libraryArray.forEach((book) => {
+    const bookElement = document.createElement('div');
+    bookElement.classList.add(`library-item`);
+    
+    // Find a unique ID by checking if it already exists in the DOM
+    let uniqueId;
+    do {
+      uniqueId = `library-item-${currentIndex}`;
+      currentIndex++;
+    } while (document.getElementById(uniqueId));
+
+    bookElement.setAttribute('id', uniqueId);
+    bookElement.innerHTML = `
+      <h2>${book.title}</h2>
+      <p>Author: ${book.author}</p>
+      <p>ISBN: ${book.pages}</p>
+      <button onclick="removeBook(${currentIndex - 4})">Remove</button>
+    `;
+    libraryContainer.appendChild(bookElement);
+  });
+}
+
 
 function clearFormInputs() {
   const titleInput = document.getElementById('title');
@@ -160,3 +228,9 @@ submitValuesToLibrary.addEventListener('click', () => {
     createBook();
   }
 });
+
+const insertButton = document.getElementById('insert-book');
+insertButton.addEventListener('click', showCreateLibrary);
+
+const svgQuit = document.getElementById('svg-quit')
+svgQuit.addEventListener('click', hideInfoAnime)

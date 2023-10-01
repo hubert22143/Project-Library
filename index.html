@@ -13,11 +13,9 @@
             <h1><i>The most recommended</i></h1>
         </div>
         <div class="button-container">
-            <div class="text">
-                <h3><i>Try the button below in order to see the cool form!</i></h3>
-            </div>
-            <div class="button">
-                <button id="insert-book">Insert your book to library</button>
+            <div class="text">Insert a new book!</div>
+            <div class="button-container">
+                <button type="submit" id="insert-book">Insert me</button>
             </div>
         </div>
     </div>
@@ -137,6 +135,7 @@
                 </svg>
             </div>
         </div>
+        <div class="main-library-wrap">
         <div class="library" id="main-library">
             <div class="library-item" id="library-item-0">
                 <div class="previous-content">
@@ -168,16 +167,16 @@
                             </div>
                         </div>
                     </div>
-                    <div class="previous-header editable" data-index="0" data-property="title">Title: Dragon Ball</div>
+                    <div class="previous-header editable">Title: Dragon Ball</div>
                     <div class="previous-wrapper">
                         <div class="previous-image">
-                            <img src="dragon_ball_image.jpg" id="a1" data-index="0" data-property="image">
+                            <img src="dragon_ball_image.jpg" id="a1">
                         </div>
                         <div class="previous-edited">
-                            <div class="previous-info editable" data-index="0" data-property="info">Info: Dragon Ball is a story...</div>
-                            <div class="pages-read" data-index="0" data-property="pages">Pages: Read pages: 400 / <span>500</span></div>
-                            <div class="status-read" data-index="0" data-property="status">Status: <button data-index="0" data-property="status" class="readed-button" id="readed-button">Read</button></div>
-                            <div class="author-page" data-index="0" data-property="author">Author: Hiroyima</div>
+                            <div class="previous-info editable">Info: Dragon Ball is a story...</div>
+                            <div class="pages-read">Pages: Read pages: 400 / <span>500</span></div>
+                            <div class="status-read">Status: <button class="readed-button" id="readed-button">Read</button></div>
+                            <div class="author-page">Author: Hiroyima</div>
                         </div>
                     </div>
                 </div>
@@ -212,13 +211,13 @@
                             </div>
                         </div>
                     </div>
-                    <div class="actual-header editable" data-index="1" data-property="title">Title: Jujutsu Kaisen</div>
+                    <div class="actual-header editable">Title: Jujutsu Kaisen</div>
                     <div class="actual-wrapper">
                         <div class="actual-image"><img src="jujutsu_image.jpg" id="a2" data-index="1" data-property="image"></div>
-                        <div class="actual-info editable" data-index="1" data-property="info">Info: Jujutsu Kaisen is a ...</div>
-                        <div class="pages-read" data-index="1" data-property="pages">Pages: Read pages: 400 / <span>500</span></div>
-                        <div class="status-read" data-index="1" data-property="status">Status: <button data-index="1" data-property="status" class="readed-button" id="readed-button">Read</button></div>
-                        <div class="author-page" data-index="1" data-property="author">Author: Akoshima</div>
+                        <div class="actual-info editable">Info: Jujutsu Kaisen is a ...</div>
+                        <div class="pages-read">Pages: Read pages: 400 / <span>500</span></div>
+                        <div class="status-read">Status: <button  class="readed-button" id="readed-button">Read</button></div>
+                        <div class="author-page">Author: Akoshima</div>
                     </div>
                 </div>
             </div>
@@ -252,17 +251,25 @@
                             </div>
                         </div>
                     </div>
-                    <div class="next-header editable" data-index="2" data-property="title">Title: Naruto</div>
+                    <div class="next-header editable">Title: Naruto</div>
                     <div class="next-wrapper">
-                        <div class="next-image"><img src="naruto_image.jpg" id="a3" data-index="2" data-property="image"></div>
-                        <div class="next-info editable" data-index="2" data-property="info">Info: Naruto is a ...</div>
-                        <div class="pages-read" data-index="2" data-property="pages">Pages: Read pages: 400 / <span>500</span></div>
-                        <div class="status-read" data-index="2" data-property="status">Status: <button data-index="2" data-property="status" class="readed-button" id="readed-button">Read</button></div>
-                        <div class="author-page" data-index="2" data-property="author">Author: Oda</div>
+                        <div class="next-image"><img src="naruto_image.jpg" id="a3"></div>
+                        <div class="next-info editable" >Info: Naruto is a ...</div>
+                        <div class="pages-read">Pages: Read pages: 400 / <span>500</span></div>
+                        <div class="status-read">Status: <button class="readed-button" id="readed-button">Read</button></div>
+                        <div class="author-page">Author: Oda</div>
                     </div>
                 </div>
             </div>
         </div>
+        <div class="library-count">
+            <ul>
+                <li class="moving"></li>
+                <li class="moving"></li>
+                <li class="moving"></li>
+            </ul>
+        </div>
+    </div>
         <div class="svg-container">
             <div class="svg-container-right">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id="button-right"><title>arrow-right-bold</title><path d="M4,15V9H12V4.16L19.84,12L12,19.84V15H4Z" /></svg>
@@ -279,7 +286,6 @@
             </div>
             <div class="notification-title"> <h2>Some data about the anime</h1></div>
                 
-
             </div>
       
     </div>

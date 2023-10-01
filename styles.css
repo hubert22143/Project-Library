@@ -109,6 +109,9 @@ justify-content: center;
     padding: 20px;
     z-index: 5;
     opacity: 1;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
   }
 .notification-image{
     width: 50px;
@@ -129,15 +132,18 @@ justify-content: center;
     display: flex;
     justify-content: center;
 }
-.layer{
+.layer {
     display: none;
     position: fixed;
+    top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
-    background-color: slategray;
-    pointer-events: none;
-
-}
+    background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent background */
+    backdrop-filter: blur(10px); /* Apply blur effect to the backdrop */
+    z-index: 1; /* Ensure it appears above other content */
+  }
+  
 .content-title{
     display: flex;
     flex-direction: column;
@@ -200,13 +206,15 @@ button:hover{
     overflow: scroll;
 }
 #insert-book{
-    width: 175px;
-    height: 75px;
-    background-color: aquamarine;
+    width: 100%;
+    height: 100%;
+    background-color:rgb(0,255,0)
 }
 #insert-book:hover{
-    background-color: aqua;
-    transform: scale(1.4);
+    background-color: rgba(0,255,0,0.6);
+}
+#insert-book:active{
+    transform: scale(0.7);
 }
 #button-right:hover{
     cursor: pointer;
@@ -219,21 +227,11 @@ button:hover{
     justify-content: center;
     align-items: center;
 }
-.button-container{
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    height: 200px;
-    margin-top: 20px;
-}
 .required-fields{
     margin-top: 15px;
 }
 .bt-cnt{
     display: flex;
-}
-.button{
-    margin-top: 30px;
 }
 .library-check{
     display: flex;  
@@ -420,4 +418,37 @@ svg:hover{
 }
 .previous-edited{
     padding: 20px;
+}
+.content-wrap{
+    display: flex;
+    flex-direction: column;
+}
+.library-count{
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+}
+ul {
+    display: flex;
+    justify-content: center;
+}
+ul > * {
+    margin: 10px;
+}
+li{
+    text-decoration: none;
+    list-style: none;
+    border: 5px solid black;
+    padding: 7px;
+}
+li.customed{
+    background-color: #2C2C2C;
+}
+.button-container{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    height: 200px;
+    width: 400px;
 }
