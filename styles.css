@@ -16,8 +16,9 @@ body{
     height: 100vh;
     width: 100%;
 }
-.tittle-container{
+.title-container{
     display: flex;
+    justify-content: center;
     width: 100%;
 }
 .library-title{
@@ -66,6 +67,7 @@ body{
     transform: scale(0.5);
     filter: blur(2px);
     opacity: 0.7;
+    pointer-events: none;
 }
 .active{
     background-color: tomato;
@@ -155,9 +157,11 @@ form{
 }
 .container{
     display: flex;
-    height: 600px;
+   justify-content: center;
 }
 .form-container{
+    display: flex;
+    flex-direction: column;
     margin-left: 15px;
     margin-top: 5px;
 }
@@ -198,12 +202,9 @@ button:hover{
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background-color: #171717;
+    background-color: bisque;
     padding: 20px;
     z-index: 1551;
-    width: 1000px;
-    height: 900px;
-    overflow: scroll;
 }
 #insert-book{
     width: 100%;
@@ -233,11 +234,24 @@ button:hover{
 .bt-cnt{
     display: flex;
 }
+.bt-cnt > * {
+    margin: 5px;
+}
+.bt-cnt > button{
+    box-shadow: none;
+    background-color: bisque;
+    border: none;
+}
+.bt-cnt > button:hover{
+    background-color: rgba(255,228,196,0.1);
+}
 .library-check{
-    display: flex;  
+    display: flex;
+    flex-direction: column;
+    background-color: beige;
 }
 .modal-svg-style{
-    background-color: gray;
+    background-color: bisque;
     cursor: pointer;
 }
 .modal-svg-style:hover{
@@ -245,18 +259,19 @@ button:hover{
 }
 .library-exit{
     width: 50px;
-    height: auto;
+    margin: 10px;
 }
 .image-file-style{
     display: flex;
     justify-content: center;
-    height: 100px;
+    width: max-content;
+    height: 30px;
+    background-color: beige;
 }
 .flex-form-holder{
     display: flex;
-    flex: auto;
+    justify-content: center;
     flex-direction: column;
-    height: 100%;
 }
 .image-preview{
     height: 100%;
@@ -298,6 +313,9 @@ button:hover{
     justify-content: space-between;
     padding: 20px;
 }
+.svg-wrapper > * {
+    margin: 10px;
+}
 .svg-styles{
     cursor: pointer;
     background-color: gainsboro;
@@ -324,6 +342,9 @@ svg:hover{
 #confirm-edit{
     display: none;
 }
+#readed{
+    width: 50%;
+}
 .edit-modal-block{
     position: fixed;
     top: 50%;
@@ -342,6 +363,10 @@ svg:hover{
     width: 100%;
     height: 10%;
     text-align: center;
+}
+select{
+    margin-left: 5px;
+    border: 1px solid black;
 }
 .edit-modal-block > form{
     display: flex;
@@ -449,6 +474,4 @@ li.customed{
     justify-content: center;
     flex-direction: column;
     align-items: center;
-    height: 200px;
-    width: 400px;
 }

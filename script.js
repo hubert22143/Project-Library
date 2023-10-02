@@ -62,15 +62,32 @@ function removeLibraryItem(index) {
     updateCarousel();
   }
 }
+function createLibrarySquare() {
+
+  const parentContainer = document.querySelector('.counter-container');
+
+  const libraryItems = document.querySelectorAll('.library-item');
+
+  const childNodesCount = parentContainer.children.length;
+  if (childNodesCount < libraryItems.length) {
+
+    const elementsToAppend = libraryItems.length - childNodesCount;
+
+    for (let i = 0; i < elementsToAppend; i++) {
+      const li = document.createElement('li');
+      li.classList.add('moving');
+      parentContainer.appendChild(li);
+    }
+  }
+}
 
 function updateCarousel() {
   const libraryItems = document.querySelectorAll('.library-item');
-   const librarySquareActive = document.querySelectorAll('.moving');
+  const parentContainer = document.querySelector('.counter-container');
   let currentIndex = 0;
-
-
   function updateLibrarySquare(){
-    librarySquareActive.forEach((item,index) => {
+    const liElements = parentContainer.querySelectorAll('li'); 
+    liElements.forEach((item,index) => {
       if(index === currentIndex){
         item.classList.add('customed');
       }else{
@@ -101,12 +118,14 @@ function updateCarousel() {
     console.log('Your current index is',currentIndex)
     showItem(currentIndex);
     updateLibraryItems()
+    createLibrarySquare()
   }
   
   function moveLeft(){
     currentIndex = (currentIndex - 1 + libraryItems.length) % libraryItems.length;
     showItem(currentIndex);
     updateLibraryItems()
+    createLibrarySquare()
   }
 
 
@@ -158,7 +177,6 @@ function createBook() {
 
 function addToLibrary(newBook) {
   const libraryArray = [];
-  console.log(libraryArray);
   libraryArray.push(newBook);
   createLibraryDom(libraryArray);
 }
@@ -169,8 +187,6 @@ function createLibraryDom(libraryArray) {
   libraryArray.forEach((book) => {
     const bookElement = document.createElement('div');
     bookElement.classList.add(`library-item`);
-    
-    // Find a unique ID by checking if it already exists in the DOM
     let uniqueId;
     do {
       uniqueId = `library-item-${currentIndex}`;
@@ -182,12 +198,25 @@ function createLibraryDom(libraryArray) {
       <h2>${book.title}</h2>
       <p>Author: ${book.author}</p>
       <p>ISBN: ${book.pages}</p>
-      <button onclick="removeBook(${currentIndex - 4})">Remove</button>
+      <img src="${book.image}" alt="Book Image">
+      <button class="delete-button">Delete</button>
     `;
     libraryContainer.appendChild(bookElement);
+    const deleteButtons = document.querySelectorAll('.delete-button');
+
+    deleteButtons.forEach((deleteButton) => {
+      deleteButton.addEventListener('click', () => {
+        const bookToRemove = deleteButton.closest('.library-item');
+        if (bookToRemove) {
+          bookToRemove.remove();
+          updateCarousel();
+        }
+      });
+    });
+    updateCarousel();
+    createLibrarySquare()
   });
 }
-
 
 function clearFormInputs() {
   const titleInput = document.getElementById('title');
