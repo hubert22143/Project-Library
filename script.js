@@ -52,16 +52,6 @@ function hideInfoAnime(){
     layer.style.display = 'none';
   }
 }
-
-function removeLibraryItem(index) {
-  const libraryItems = document.querySelectorAll('.library-item');
-
-  if (index >= 0 && index < libraryItems.length) {
-    const removedItem = libraryItems[index];
-    removedItem.remove();
-    updateCarousel();
-  }
-}
 function createLibrarySquare() {
 
   const parentContainer = document.querySelector('.counter-container');
@@ -81,10 +71,11 @@ function createLibrarySquare() {
   }
 }
 
+let currentIndex = 0;
 function updateCarousel() {
   const libraryItems = document.querySelectorAll('.library-item');
   const parentContainer = document.querySelector('.counter-container');
-  let currentIndex = 0;
+ currentIndex = 0;
   function updateLibrarySquare(){
     const liElements = parentContainer.querySelectorAll('li'); 
     liElements.forEach((item,index) => {
@@ -107,7 +98,7 @@ function updateCarousel() {
       }
     })
   }
-  updateLibraryItems();
+  updateLibraryItems()
   function showItem(index){
     libraryItems.forEach(item => item.classList.remove('active'));
     libraryItems[index].classList.add('active');
@@ -128,11 +119,13 @@ function updateCarousel() {
     createLibrarySquare()
   }
 
-
   const previousButton = document.getElementById('button-left');
-  previousButton.addEventListener('click', moveLeft);
-
   const nextButton = document.getElementById('button-right');
+
+  previousButton.removeEventListener('click', moveLeft);
+  nextButton.removeEventListener('click', moveRight);
+  
+  previousButton.addEventListener('click', moveLeft);
   nextButton.addEventListener('click', moveRight);
 }
 updateCarousel();
@@ -182,11 +175,13 @@ function addToLibrary(newBook) {
 }
 function createLibraryDom(libraryArray) {
   const libraryContainer = document.getElementById('main-library');
-  let currentIndex = 3;
+  const currentItemCount = libraryContainer.querySelectorAll('.library-item').length;
+
+  currentIndex = currentItemCount;
 
   libraryArray.forEach((book) => {
     const bookElement = document.createElement('div');
-    bookElement.classList.add(`library-item`);
+    bookElement.classList.add(`library-item`, 'inactive');
     let uniqueId;
     do {
       uniqueId = `library-item-${currentIndex}`;
@@ -209,11 +204,9 @@ function createLibraryDom(libraryArray) {
         const bookToRemove = deleteButton.closest('.library-item');
         if (bookToRemove) {
           bookToRemove.remove();
-          updateCarousel();
         }
       });
     });
-    updateCarousel();
     createLibrarySquare()
   });
 }
@@ -242,14 +235,6 @@ notificationButton.forEach((item) => {
 
 const quitNotification = document.getElementById('svg-quit');
 quitNotification.addEventListener('click', hideNotification);
-
-const removeButton = document.querySelectorAll('#remove');
-removeButton.forEach((item, index) => {
-  item.addEventListener('click', () => {
-    removeLibraryItem(index);
-    updateCarousel();
-  });
-});
 
 const submitValuesToLibrary = document.getElementById('submit');
 submitValuesToLibrary.addEventListener('click', () => {
