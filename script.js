@@ -52,16 +52,18 @@ function hideInfoAnime(){
     layer.style.display = 'none';
   }
 }
+const libraryArrayHolder = [];
+const libraryItemElements = document.querySelectorAll('.library-item');
+libraryItemElements.forEach((element) => {
+  libraryArrayHolder.push(element);
+});
 function createLibrarySquare() {
 
   const parentContainer = document.querySelector('.counter-container');
-
-  const libraryItems = document.querySelectorAll('.library-item');
-
   const childNodesCount = parentContainer.children.length;
-  if (childNodesCount < libraryItems.length) {
+  if (childNodesCount < libraryArrayHolder.length) {
 
-    const elementsToAppend = libraryItems.length - childNodesCount;
+    const elementsToAppend = libraryArrayHolder.length - childNodesCount;
 
     for (let i = 0; i < elementsToAppend; i++) {
       const li = document.createElement('li');
@@ -70,12 +72,10 @@ function createLibrarySquare() {
     }
   }
 }
-
 let currentIndex = 0;
-function updateCarousel() {
-  const libraryItems = document.querySelectorAll('.library-item');
+  let libraryItems = Array.from(document.querySelectorAll('.library-item'));
+  console.log(libraryArrayHolder);
   const parentContainer = document.querySelector('.counter-container');
- currentIndex = 0;
   function updateLibrarySquare(){
     const liElements = parentContainer.querySelectorAll('li'); 
     liElements.forEach((item,index) => {
@@ -86,50 +86,68 @@ function updateCarousel() {
       }
     })
   }
-  function updateLibraryItems(){
+  function updateLibraryItems() {
     updateLibrarySquare();
-    libraryItems.forEach((item,index) => {
-      if(index === currentIndex){
-        item.classList.add('active');
-        item.classList.remove('inactive');
-      }else{
-        item.classList.add('inactive');
-        item.classList.remove('active');
+    libraryArrayHolder.forEach((item, index) => {
+      if(item && item.classList){
+      if (index === currentIndex) {
+          item.classList.add('active');
+          item.classList.remove('inactive');
+        }else{
+          item.classList.add('inactive');
+          item.classList.remove('active');
+        }
+      }else if(item.classList === undefined){
+        console.log("Item doesn't exist yet");
       }
-    })
+    });
   }
   updateLibraryItems()
-  function showItem(index){
-    libraryItems.forEach(item => item.classList.remove('active'));
-    libraryItems[index].classList.add('active');
-  }
-
   function moveRight(){
-    currentIndex = (currentIndex + 1) % libraryItems.length;
+    currentIndex = (currentIndex + 1) % libraryArrayHolder.length;
     console.log('Your current index is',currentIndex)
-    showItem(currentIndex);
     updateLibraryItems()
-    createLibrarySquare()
   }
   
   function moveLeft(){
-    currentIndex = (currentIndex - 1 + libraryItems.length) % libraryItems.length;
-    showItem(currentIndex);
+    currentIndex = (currentIndex - 1 + libraryArrayHolder.length) % libraryArrayHolder.length;
     updateLibraryItems()
-    createLibrarySquare()
   }
 
-  const previousButton = document.getElementById('button-left');
-  const nextButton = document.getElementById('button-right');
-
-  previousButton.removeEventListener('click', moveLeft);
-  nextButton.removeEventListener('click', moveRight);
+  function deleteItem(indexToDelete) {
+    if (currentIndex === indexToDelete) {
+      let currentItem = document.querySelector(`.library-item[data-index="${currentIndex}"]`);
+      let selectedLibraryCounter = document.querySelector('.moving.customed');
+      console.log(selectedLibraryCounter);
+      console.log(currentItem);
+      console.log("Current index matches indexToDelete");
   
-  previousButton.addEventListener('click', moveLeft);
-  nextButton.addEventListener('click', moveRight);
-}
-updateCarousel();
-
+      if (currentItem) {
+        currentItem.remove();
+        selectedLibraryCounter.remove();
+        currentIndex = (currentIndex - 1 + libraryArrayHolder.length) % libraryArrayHolder.length;
+      }
+      console.log("Your index to be deleted is:", indexToDelete);
+      libraryArrayHolder.splice(indexToDelete, 1);
+      console.log("Your current index is now:", currentIndex);
+    } else {
+      console.log("Current index doesn't match indexToDelete");
+      console.log("indexToDelete:", indexToDelete);
+      console.log("currentIndex:", currentIndex);
+    }
+  
+    updateLibraryItems();
+  }
+const deleteButtons = document.querySelectorAll('#remove');
+  
+deleteButtons.forEach((deleteButton,index) => {
+deleteButton.addEventListener('click', () => {
+  console.log("Clicked");
+  deleteItem(currentIndex);
+  updateLibraryItems();
+  updateLibrarySquare();
+});
+});
 function validateFormInputs() {
   const titleInput = document.getElementById('title');
   const authorInput = document.getElementById('author');
@@ -149,90 +167,78 @@ function validateFormInputs() {
 
   return true;
 }
-
-
 function createBook() {
   const titleInput = document.getElementById('title').value.trim();
   const authorInput = document.getElementById('author').value.trim();
   const pageInput = document.getElementById('pages').value.trim();
   const imageInput = document.getElementById('image-file').files[0];
+  
   const newBook = {
     title: titleInput,
     author: authorInput,
     pages: pageInput,
     image: URL.createObjectURL(imageInput),
-    status: 'Unreaded',
+    status: 'Unread',
   };
+  
 
   addToLibrary(newBook);
+
   clearFormInputs();
 }
-
 function addToLibrary(newBook) {
-  const libraryArray = [];
-  libraryArray.push(newBook);
-  createLibraryDom(libraryArray);
-}
-function createLibraryDom(libraryArray) {
   const libraryContainer = document.getElementById('main-library');
-  const currentItemCount = libraryContainer.querySelectorAll('.library-item').length;
+  let currentIndex = libraryArrayHolder.length - 1;
 
-  currentIndex = currentItemCount;
+  const bookElement = document.createElement('div');
+  bookElement.classList.add('library-item');
+  bookElement.setAttribute('data-index', currentIndex);
+  let uniqueId;
+  do {
+    uniqueId = `library-item-${currentIndex}`;
+    currentIndex++;
+  } while (document.getElementById(uniqueId));
 
-  libraryArray.forEach((book) => {
-    const bookElement = document.createElement('div');
-    bookElement.classList.add(`library-item`, 'inactive');
-    let uniqueId;
-    do {
-      uniqueId = `library-item-${currentIndex}`;
-      currentIndex++;
-    } while (document.getElementById(uniqueId));
+  bookElement.setAttribute('id', uniqueId);
+  bookElement.innerHTML = `
+    <h2>${newBook.title}</h2>
+    <p>Author: ${newBook.author}</p>
+    <p>ISBN: ${newBook.pages}</p>
+    <img src="${newBook.image}" alt="Book Image">
+    <button id="remove">Delete</button>
+  `;
 
-    bookElement.setAttribute('id', uniqueId);
-    bookElement.innerHTML = `
-      <h2>${book.title}</h2>
-      <p>Author: ${book.author}</p>
-      <p>ISBN: ${book.pages}</p>
-      <img src="${book.image}" alt="Book Image">
-      <button class="delete-button">Delete</button>
-    `;
-    libraryContainer.appendChild(bookElement);
-    const deleteButtons = document.querySelectorAll('.delete-button');
+  libraryContainer.appendChild(bookElement);
 
-    deleteButtons.forEach((deleteButton) => {
-      deleteButton.addEventListener('click', () => {
-        const bookToRemove = deleteButton.closest('.library-item');
-        if (bookToRemove) {
-          bookToRemove.remove();
-        }
-      });
-    });
-    createLibrarySquare()
-  });
+
+  console.log(libraryArrayHolder.length);
+  console.log(libraryArrayHolder);
+
+  libraryArrayHolder.push(bookElement);
+  createLibrarySquare()
+  updateLibraryItems();
+  updateLibrarySquare();
+  console.log(libraryArrayHolder.length);
+  console.log(libraryArrayHolder);
 }
 
 function clearFormInputs() {
-  const titleInput = document.getElementById('title');
-  const authorInput = document.getElementById('author');
-  const pageInput = document.getElementById('pages');
-  const imageInput = document.getElementById('image-file');
-  const imageName = document.getElementById('placeholder');
-  const imagePreview = document.getElementById('image-preview');
-
-  titleInput.value = '';
-  authorInput.value = '';
-  pageInput.value = '';
-  imageInput.value = '';
-  imageName.textContent = '';
-  imagePreview.src = '';
+  document.getElementById('title').value = '';
+  document.getElementById('author').value = '';
+  document.getElementById('pages').value = '';
+  document.getElementById('image-file').value = '';
 }
 
+  
+const svgQuit = document.getElementById('svg-quit')
+svgQuit.addEventListener('click', hideInfoAnime);
 
+const insertButton = document.getElementById('insert-book');
+insertButton.addEventListener('click', showCreateLibrary);
 const notificationButton = document.querySelectorAll('#information-about');
 notificationButton.forEach((item) => {
   item.addEventListener('click', showNotification);
 });
-
 const quitNotification = document.getElementById('svg-quit');
 quitNotification.addEventListener('click', hideNotification);
 
@@ -241,10 +247,8 @@ submitValuesToLibrary.addEventListener('click', () => {
   if (validateFormInputs()) {
     createBook();
   }
-});
-
-const insertButton = document.getElementById('insert-book');
-insertButton.addEventListener('click', showCreateLibrary);
-
-const svgQuit = document.getElementById('svg-quit')
-svgQuit.addEventListener('click', hideInfoAnime)
+})
+const previousButton = document.getElementById('button-left');
+const nextButton = document.getElementById('button-right');
+previousButton.addEventListener('click', moveLeft);
+nextButton.addEventListener('click', moveRight);
