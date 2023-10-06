@@ -72,6 +72,7 @@ function createLibrarySquare() {
     }
   }
 }
+
 let currentIndex = 0;
   let libraryItems = Array.from(document.querySelectorAll('.library-item'));
   console.log(libraryArrayHolder);
@@ -103,15 +104,42 @@ let currentIndex = 0;
     });
   }
   updateLibraryItems()
-  function moveRight(){
+  function moveRight() {
+    let libraryContainer = document.querySelector('.library');
     currentIndex = (currentIndex + 1) % libraryArrayHolder.length;
-    console.log('Your current index is',currentIndex)
-    updateLibraryItems()
+    console.log('Your current index is', currentIndex);
+    const itemWidth = libraryArrayHolder[currentIndex].offsetWidth;
+  
+    let shiftAmount = 50;
+    const desiredScrollPosition = currentIndex * itemWidth - libraryContainer.clientWidth / 2 + shiftAmount;
+  
+    libraryContainer.scrollLeft = desiredScrollPosition;
+  
+    libraryContainer.scrollTo({
+      left: desiredScrollPosition,
+      behavior: 'smooth',
+    });
+  
+    updateLibraryItems();
   }
   
-  function moveLeft(){
+  function moveLeft() {
+    let libraryContainer = document.querySelector('.library');
     currentIndex = (currentIndex - 1 + libraryArrayHolder.length) % libraryArrayHolder.length;
-    updateLibraryItems()
+    console.log('Your current index is', currentIndex);
+    const itemWidth = libraryArrayHolder[currentIndex].offsetWidth;
+  
+    let shiftAmount = 50;
+    const desiredScrollPosition = currentIndex * itemWidth - libraryContainer.clientWidth / 2 + shiftAmount;
+  
+    libraryContainer.scrollLeft = desiredScrollPosition;
+
+    libraryContainer.scrollTo({
+      left: desiredScrollPosition,
+      behavior: 'smooth',
+    });
+  
+    updateLibraryItems();
   }
 
   function deleteItem(indexToDelete) {
@@ -188,38 +216,54 @@ function createBook() {
 }
 function addToLibrary(newBook) {
   const libraryContainer = document.getElementById('main-library');
-  let currentIndex = libraryArrayHolder.length - 1;
+  const template = document.querySelector('.library-item'); // Assuming this is your template
+  const bookElement = template.cloneNode(true); // Clone the template
 
-  const bookElement = document.createElement('div');
-  bookElement.classList.add('library-item');
+  // Update the cloned book element with data from newBook
+  const currentIndex = libraryArrayHolder.length;
   bookElement.setAttribute('data-index', currentIndex);
-  let uniqueId;
-  do {
-    uniqueId = `library-item-${currentIndex}`;
-    currentIndex++;
-  } while (document.getElementById(uniqueId));
+  bookElement.id = `library-item-${currentIndex}`;
+  
+  const titleElement = bookElement.querySelector('.title');
+  if (titleElement) {
+    titleElement.textContent = `Title: ${newBook.title}`;
+  }
 
-  bookElement.setAttribute('id', uniqueId);
-  bookElement.innerHTML = `
-    <h2>${newBook.title}</h2>
-    <p>Author: ${newBook.author}</p>
-    <p>ISBN: ${newBook.pages}</p>
-    <img src="${newBook.image}" alt="Book Image">
-    <button id="remove">Delete</button>
-  `;
+  const authorElement = bookElement.querySelector('.author-page');
+  if (authorElement) {
+    authorElement.textContent = `Author: ${newBook.author}`;
+  }
+
+  const pagesElement = bookElement.querySelector('.pages-read');
+  if (pagesElement) {
+    pagesElement.textContent = `Readed pages: ${newBook.pages}`;
+  }
+
+  const imageElement = bookElement.querySelector('.image');
+  if (imageElement) {
+    imageElement.src = newBook.image;
+    imageElement.alt = `Image for ${newBook.title}`;
+  }
+  const informtionButton = bookElement.querySelector('#information-about');
+  if(informtionButton){
+    informtionButton.addEventListener('click',showNotification);
+  }
+  const removeButton = bookElement.querySelector('#remove');
+  if (removeButton) {
+    removeButton.addEventListener('click', () => {
+      deleteItem(currentIndex);
+    });
+  }
 
   libraryContainer.appendChild(bookElement);
 
-
-  console.log(libraryArrayHolder.length);
-  console.log(libraryArrayHolder);
-
+  // Push the cloned book element to your library array
   libraryArrayHolder.push(bookElement);
-  createLibrarySquare()
+
+  // Perform other necessary operations
+  createLibrarySquare();
   updateLibraryItems();
   updateLibrarySquare();
-  console.log(libraryArrayHolder.length);
-  console.log(libraryArrayHolder);
 }
 
 function clearFormInputs() {

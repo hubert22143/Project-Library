@@ -33,7 +33,9 @@ body{
     background-color: #2C2C2C;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
     letter-spacing: 0.2rem;
-    overflow: hidden;
+    overflow-x: auto;
+    width: 700px;
+    height: 800px;
 }
 .library-item{
     display: flex;
