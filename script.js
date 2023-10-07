@@ -13,15 +13,15 @@ function showNotification() {
 function hideNotification() {
   const notificationContainer = document.querySelector('.notification-box-info');
   const layerBackground = document.querySelector('.layer');
-  const movePanelLeft = document.querySelector('.svg-container-left');
-  const movePanelRight = document.querySelector('.svg-container-right');
-
+  const svgContainerLeft = document.querySelector('.svg-container-left');
+  const svgContainerRight = document.querySelector('.svg-container-right');
   const notificationContent = document.querySelector('.anime-content');
-  notificationContent.innerHTML = '';
-
+  if(notificationContent){
+    notificationContent.innerHTML = '';
+  }
   notificationContainer.style.display = 'none';
-  movePanelLeft.style.display = 'block';
-  movePanelRight.style.display = 'block';
+  svgContainerLeft.style.display = 'flex'
+  svgContainerRight.style.display = 'flex';
   layerBackground.style.display = 'none';
 }
 
@@ -43,20 +43,44 @@ function exitFromLibrary(){
   })
 }
 exitFromLibrary();
-
-function hideInfoAnime(){
-  const container = document.querySelector('.notification-box-info');
-  const layer = document.querySelector('.layer');
-  if(container.style.display = 'block'){
-    container.style.display = 'none';
-    layer.style.display = 'none';
-  }
-}
 const libraryArrayHolder = [];
 const libraryItemElements = document.querySelectorAll('.library-item');
 libraryItemElements.forEach((element) => {
   libraryArrayHolder.push(element);
 });
+let svgButtons = document.querySelectorAll('#information-about');
+let infoContainer = document.querySelector('.container-box-info');
+
+const notificationButtons = document.querySelectorAll('#information-about');
+let libraryArray = [];
+libraryItemElements.forEach((element) => {
+  const libraryItem = {};
+  libraryItem.index = element.getAttribute('data-index');
+  libraryItem.title = element.querySelector('.title').textContent.replace('Title: ', '');
+  libraryItem.author = element.querySelector('.author-page').textContent.replace('Author: ', '');
+  libraryItem.imageSrc = element.querySelector('.image').getAttribute('src');
+  const pagesReadText = element.querySelector('.pages-read').textContent;
+  libraryItem.pagesRead = parseInt(pagesReadText.replace('Pages: Readed pages: ', ''));
+  libraryItem.status = element.querySelector('.status-read button').textContent;
+  libraryArray.push(libraryItem);
+});
+console.log(libraryArray);
+
+notificationButtons.forEach((button, index) => {
+  button.addEventListener('click', () => {
+    const infoContainer = document.querySelector('.container-box-info');
+    const selectedBook = libraryArray[index]; // Use libraryArray, not libraryArrayHolder
+    const div = document.createElement('div');
+    div.setAttribute('class','anime-content');
+    if (selectedBook) {
+      div.textContent = `Title: ${selectedBook.title}, Author: ${selectedBook.author}, Pages: ${selectedBook.pagesRead}`;
+    } else {
+      div.textContent = "No content available";
+    }
+    infoContainer.appendChild(div);
+  });
+});
+
 function createLibrarySquare() {
 
   const parentContainer = document.querySelector('.counter-container');
@@ -200,7 +224,7 @@ function createBook() {
   const authorInput = document.getElementById('author').value.trim();
   const pageInput = document.getElementById('pages').value.trim();
   const imageInput = document.getElementById('image-file').files[0];
-  
+
   const newBook = {
     title: titleInput,
     author: authorInput,
@@ -216,10 +240,9 @@ function createBook() {
 }
 function addToLibrary(newBook) {
   const libraryContainer = document.getElementById('main-library');
-  const template = document.querySelector('.library-item'); // Assuming this is your template
-  const bookElement = template.cloneNode(true); // Clone the template
+  const template = document.querySelector('.library-item');
+  const bookElement = template.cloneNode(true);
 
-  // Update the cloned book element with data from newBook
   const currentIndex = libraryArrayHolder.length;
   bookElement.setAttribute('data-index', currentIndex);
   bookElement.id = `library-item-${currentIndex}`;
@@ -257,10 +280,8 @@ function addToLibrary(newBook) {
 
   libraryContainer.appendChild(bookElement);
 
-  // Push the cloned book element to your library array
   libraryArrayHolder.push(bookElement);
 
-  // Perform other necessary operations
   createLibrarySquare();
   updateLibraryItems();
   updateLibrarySquare();
@@ -272,11 +293,24 @@ function clearFormInputs() {
   document.getElementById('pages').value = '';
   document.getElementById('image-file').value = '';
 }
+const svgEdit = document.querySelectorAll('#edit');
+function showEditItem() {
+  const editBlockItem = document.querySelector('.edit-block-notification');
+  if(editBlockItem.style.display === 'none' || 
+     editBlockItem.style.display === ''){
+      editBlockItem.style.display = 'block';
+     }else{
+      editBlockItem.style.display = 'none';
+     }
+}
 
-  
+svgEdit.forEach(item => {
+  item.addEventListener('click', showEditItem);
+});
+
+
 const svgQuit = document.getElementById('svg-quit')
-svgQuit.addEventListener('click', hideInfoAnime);
-
+svgQuit.addEventListener('click', hideNotification);
 const insertButton = document.getElementById('insert-book');
 insertButton.addEventListener('click', showCreateLibrary);
 const notificationButton = document.querySelectorAll('#information-about');
