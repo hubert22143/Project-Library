@@ -16,9 +16,7 @@ function hideNotification() {
   const svgContainerLeft = document.querySelector('.svg-container-left');
   const svgContainerRight = document.querySelector('.svg-container-right');
   const notificationContent = document.querySelector('.anime-content');
-  if(notificationContent){
-    notificationContent.innerHTML = '';
-  }
+  notificationContent.remove();
   notificationContainer.style.display = 'none';
   svgContainerLeft.style.display = 'flex'
   svgContainerRight.style.display = 'flex';
@@ -61,7 +59,7 @@ libraryItemElements.forEach((element) => {
   libraryItem.imageSrc = element.querySelector('.image').getAttribute('src');
   const pagesReadText = element.querySelector('.pages-read').textContent;
   libraryItem.pagesRead = parseInt(pagesReadText.replace('Pages: Readed pages: ', ''));
-  libraryItem.status = element.querySelector('.status-read button').textContent;
+  libraryItem.status = element.querySelector('.status-read').textContent;
   libraryArray.push(libraryItem);
 });
 console.log(libraryArray);
@@ -73,7 +71,7 @@ notificationButtons.forEach((button, index) => {
     const div = document.createElement('div');
     div.setAttribute('class','anime-content');
     if (selectedBook) {
-      div.textContent = `Title: ${selectedBook.title}, Author: ${selectedBook.author}, Pages: ${selectedBook.pagesRead}`;
+      div.textContent = `Title: ${selectedBook.title}, Author: ${selectedBook.author}, Pages: ${selectedBook.pagesRead}, Status: ${selectedBook.status}`;
     } else {
       div.textContent = "No content available";
     }
@@ -293,6 +291,8 @@ function clearFormInputs() {
   document.getElementById('pages').value = '';
   document.getElementById('image-file').value = '';
 }
+
+
 const svgEdit = document.querySelectorAll('#edit');
 function showEditItem() {
   const editBlockItem = document.querySelector('.edit-block-notification');
@@ -304,10 +304,60 @@ function showEditItem() {
      }
 }
 
-svgEdit.forEach(item => {
-  item.addEventListener('click', showEditItem);
+svgEdit.forEach((button,index)=> {
+  button.addEventListener('click', () => {
+    showEditItem();
+
+    let currentLibraryItem = libraryArrayHolder[index];
+
+    const editTitle = document.getElementById('Edit-Title');
+    const editAuthor = document.getElementById('Edit-Author');
+    const editPages = document.getElementById('Edit-Pages');
+    const editStatus = document.getElementById('Edit-Status');
+    const editImage = document.getElementById('Edit-Image');
+    const editImagePreview = document.getElementById('get-image-preview');
+
+    editTitle.value = currentLibraryItem.querySelector('.title').textContent;
+    editAuthor.value = currentLibraryItem.querySelector('.author-page').textContent;
+    editPages.value = currentLibraryItem.querySelector('.pages-read').textContent.replace(' pages', '');
+    editStatus.value = currentLibraryItem.querySelector('.status-read').textContent;
+    editImage.src = currentLibraryItem.querySelector('.image').src;
+    const editForm = document.querySelector('#edit-form');
+    editForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      currentLibraryItem.querySelector('.title').textContent = editTitle.value;
+      currentLibraryItem.querySelector('.author-page').textContent = editAuthor.value;
+      currentLibraryItem.querySelector('.pages-read').textContent = editPages.value + ' pages';
+      currentLibraryItem.querySelector('.status-read').textContent = editStatus.value;
+      currentLibraryItem.querySelector('.image').src = editImagePreview.src;
+      showEditItem();
+    });
+  });
 });
 
+const editButtons = document.querySelectorAll('#dit');
+const books = document.querySelectorAll('.library-item');
+
+
+
+
+function getImagePreview() {
+  let imageInput = document.getElementById('Edit-Image');
+  let previewImage = document.getElementById('get-image-preview');
+
+  if (imageInput.files && imageInput.files[0]) {
+    const reader = new FileReader();
+
+    reader.onload = function(e) {
+      previewImage.src = e.target.result;
+    };
+
+    reader.readAsDataURL(imageInput.files[0]);
+  }
+}
+
+const imageInput = document.getElementById('Edit-Image');
+imageInput.addEventListener('change', getImagePreview);
 
 const svgQuit = document.getElementById('svg-quit')
 svgQuit.addEventListener('click', hideNotification);

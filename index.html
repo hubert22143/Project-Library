@@ -26,7 +26,7 @@
                     <h2>Edit your book</h2>
                 </div>
             </div>
-            <form>
+            <form id="edit-form">
                 <div class="edit-container">
                     <div class="joiner">
                         <label for="Edit-Title">Title</label>
@@ -35,10 +35,6 @@
                     <div class="joiner">
                         <label for="Edit-Author">Author</label>
                         <input type="text" id="Edit-Author">
-                    </div>
-                    <div class="joiner">
-                        <label for="Edit-Info">Info</label>
-                        <textarea id="Edit-Info"></textarea>
                     </div>
                     <div class="joiner">
                         <label for="Edit-Pages">Pages</label>
@@ -56,7 +52,7 @@
                         <input type="file" class="Edit-Image-Style" id="Edit-Image" accept=".jpg, .jpeg, .png">
                         <div class="Edit-Preview">
                             <p>Image Preview</p>
-                            <img src="" id="edit-image-preview" width="300" height="200">
+                            <img src="" id="get-image-preview" width="300" height="200">
                         </div>
                     </div>
                     <div class="edit-wrap">
@@ -168,7 +164,7 @@
                         </div>
                         <div class="previous-edited">
                             <div class="pages-read">Pages:</div>
-                            <div class="status-read">Status: <button class="readed-button" id="readed-button">Read</button></div>
+                            <div class="status-read">Status: Readed </div>
                             <div class="author-page">Author: Hiroyima</div>
                         </div>
                     </div>
@@ -208,7 +204,7 @@
                     <div class="actual-wrapper">
                         <div class="actual-image"><img src="jujutsu_image.jpg" id="a2" data-index="1" data-property="image" class="image"></div>
                         <div class="pages-read">Pages: Readed pages: 400 </div>
-                        <div class="status-read">Status: <button  class="readed-button" id="readed-button">Read</button></div>
+                        <div class="status-read">Status: Readed </div>
                         <div class="author-page">Author: Akoshima</div>
                     </div>
                 </div>
@@ -247,7 +243,7 @@
                     <div class="next-wrapper">
                         <div class="next-image"><img src="naruto_image.jpg" id="a3" class="image"></div>
                         <div class="pages-read">Pages: Read pages: 400</div>
-                        <div class="status-read">Status: <button class="readed-button" id="readed-button">Read</button></div>
+                        <div class="status-read">Status: Readed </div>
                         <div class="author-page">Author: Oda</div>
                     </div>
                 </div>
