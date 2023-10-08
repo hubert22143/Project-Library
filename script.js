@@ -67,7 +67,7 @@ console.log(libraryArray);
 notificationButtons.forEach((button, index) => {
   button.addEventListener('click', () => {
     const infoContainer = document.querySelector('.container-box-info');
-    const selectedBook = libraryArray[index]; // Use libraryArray, not libraryArrayHolder
+    const selectedBook = libraryArray[index];
     const div = document.createElement('div');
     div.setAttribute('class','anime-content');
     if (selectedBook) {
@@ -331,6 +331,12 @@ svgEdit.forEach((button,index)=> {
       currentLibraryItem.querySelector('.status-read').textContent = editStatus.value;
       currentLibraryItem.querySelector('.image').src = editImagePreview.src;
       showEditItem();
+    });
+    let editCancel = document.getElementById('edit-cancel');
+    let editBlockItem = document.querySelector('.edit-block-notification');
+    
+    editCancel.addEventListener('click', () => {
+      editBlockItem.style.display = 'none';
     });
   });
 });
